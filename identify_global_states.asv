@@ -87,8 +87,6 @@ function [ PSI_cell, num_global_states, PSI ] = identify_global_states( wlans, n
                                     % candidate range remains the same
 
                                 otherwise
-                                    % unkown number of channels
-                                    error('Unkown number of channels')
 
                             end
 
@@ -138,12 +136,12 @@ function [ PSI_cell, num_global_states, PSI ] = identify_global_states( wlans, n
         end
     end
     
-    % Workaround for the case of just one channel in the system. Convert
-    % row to column vector
+    % Workaround for the case of just one channel in the system
     if num_channels_system == 1
-        for psi_ix = 1 : num_global_states
-            PSI_cell{psi_ix} = PSI_cell{psi_ix}';
-        end
+    
+    end
+    for psi_ix = 1 : num_global_states
+        PSI_cell{psi_ix} = PSI_cell{psi_ix}';
     end
 end
 
