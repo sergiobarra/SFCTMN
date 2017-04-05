@@ -1,4 +1,4 @@
-# CTMN-DSA
+# WLAN-CTMC-DSA
 
 Continuous Time Markov Network (CTMN) framework for analyzing Wireless Local Area Networks (WLANs) implementing Dynamic Spectrum Allocation (DSA) and Dynamic Channel Bonding (DCB) policies.
 
