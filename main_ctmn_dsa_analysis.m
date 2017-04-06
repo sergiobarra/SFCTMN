@@ -8,9 +8,12 @@ clc
 
 %% System config
 
-disp('**********************')
-disp('* WLAN CTMC ANALYSIS *')
-disp('**********************')
+disp('*********************************************************************');
+disp('* WLAN CTMN Dynamic Spectrum Access analysis framework              *');
+disp('* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina       *');
+disp('* GitHub repository: https://github.com/sergiobarra/WLAN-CTMC-DSA   *');
+disp('*********************************************************************');
+    
 disp(' ')
 disp('Loading constant variables...')
 constants_script      % Execute constant variables.m script to store constants in the workspace
@@ -22,7 +25,7 @@ disp('  - Constants loaded!')
 flag_save_console_logs = false;     % Flag for saving the console logs in a text file
 % - Display
 flag_display_PSI_states = false;     % Flag for displaying PSI's CTMC states
-flag_display_S_states = true;       % Flag for displaying S' CTMC states
+flag_display_S_states = false;       % Flag for displaying S' CTMC states
 flag_display_wlans = true;         % Flag for displaying WLANs' input info
 flag_display_Power_PSI = false;         % Flag for displaying sensed powers
 flag_display_Q_logical = false;     % Flag for displaying logical transition rate matrix 
@@ -30,16 +33,20 @@ flag_display_Q = false;              % Flag for displaying transition rate matri
 flag_display_throughput = true;     % Flag for displaying the throughput
 % - Plots
 flag_plot_PSI_ctmc = false;          % Flag for plotting PSI's CTMC
-flag_plot_S_ctmc = true;           % Flag for plotting S' CTMC
-flag_plot_wlans = false;            % Flag for plotting WLANs' distribution
-flag_plot_ch_allocation = true;    % Flag for plotting WLANs' channel allocation
-flag_plot_throughput = true;        % Flag for plotting the throughput
+flag_plot_S_ctmc = false;           % Flag for plotting S' CTMC
+flag_plot_wlans = true;            % Flag for plotting WLANs' distribution
+flag_plot_ch_allocation = false;    % Flag for plotting WLANs' channel allocation
+flag_plot_throughput = false;        % Flag for plotting the throughput
 % - Logs
 flag_logs_feasible_space = false;   % Flag for displaying logs of feasible space construction algorithm
+
 % System configuration
-path_loss_model = PATH_LOSS_FREE_SPACE;
+path_loss_model = PATH_LOSS_AX_RESIDENTIAL;
 access_protocol_type = ACCESS_PROTOCOL_IEEE80211;
 dsa_policy_type = DSA_POLICY_AGGRESSIVE;
+flag_hardcode_distances = true;
+carrier_frequency = 5E9;             % Carrier frequency [MHz] WiFi 5 GHz
+
 % dsa_policy_type = DSA_POLICY_ONLY_MAX;
 % dsa_policy_type = DSA_POLICY_EXPLORER_UNIFORM;
 % dsa_policy_type = DSA_POLICY_EXPLORER_LADDER;
@@ -65,9 +72,10 @@ for w = 1 : num_wlans
     wlans(w).code = input_data(w,INPUT_FIELD_IX_CODE);          % Pick WLAN code
     wlans(w).primary = input_data(w,INPUT_FIELD_PRIMARY_CH);    % Pick primary channel
     wlans(w).range = [input_data(w,INPUT_FIELD_LEFT_CH) input_data(w,INPUT_FIELD_RIGHT_CH)];  % pick range
-    wlans(w).num_nodes = input_data(w,INPUT_FIELD_NUM_NODES);   % Pick number of nodes
-    wlans(w).position = [input_data(w,INPUT_FIELD_POS_X) input_data(w,INPUT_FIELD_POS_Y)...
-        input_data(w,INPUT_FIELD_POS_Z)];                       % Pick positions
+    wlans(w).position_ap = [input_data(w,INPUT_FIELD_POS_AP_X) input_data(w,INPUT_FIELD_POS_AP_Y)...
+        input_data(w,INPUT_FIELD_POS_AP_Z)];                       % Pick AP positions
+    wlans(w).position_sta = [input_data(w,INPUT_FIELD_POS_STA_X) input_data(w,INPUT_FIELD_POS_STA_Y)...
+        input_data(w,INPUT_FIELD_POS_STA_Z)];                       % Pick STA positions
     wlans(w).tx_power = input_data(w,INPUT_FIELD_TX_POWER);     % Pick transmission power
     wlans(w).cca = input_data(w,INPUT_FIELD_CCA);               % Pick CCA level
     wlans(w).lambda = input_data(w,INPUT_FIELD_LAMBDA);         % Pick lambda
@@ -80,12 +88,27 @@ for w = 1 : num_wlans
 
 end
 
+
 % HARDCODING distance for convenience
-distance_ap_sta = 1;
-distance_ap_ap = 700;
-for w = 1 : num_wlans
-    wlans(w).position = [((w - 1) * distance_ap_ap) 0 0];
+%  AP ---- AP ---- AP
+%  |       |       |
+% STA     STA     STA
+%
+if flag_hardcode_distances
+    disp('  - HARDCODING DISTANCES FOR CONVENIENCE!')
+    distance_ap_sta = 1;
+    distance_ap_ap = 20;
+    for w = 1 : num_wlans
+        wlans(w).position_ap = [((w - 1) * distance_ap_ap) 0 0];
+        wlans(w).position_sta = wlans(w).position_ap + [0 -distance_ap_sta 0];
+    end
 end
+% END OF HARDCODING distance for convenience
+
+interest_power = compute_power_received(distance_ap_sta, POWER_TX_DEFAULT, GAIN_TX_DEFAULT,...
+    GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);
+
+sinr_isolation = compute_sinr(interest_power, 0, NOISE_DBM);
 
 disp('  - Checking input configuration...')
 
@@ -93,11 +116,14 @@ check_input_config(wlans);
 
 disp('  - Input file processed successfully!')
 
-display_wlans(wlans, flag_display_wlans, flag_plot_wlans, flag_plot_ch_allocation, num_channels_system)
+display_wlans(wlans, flag_display_wlans, flag_plot_wlans, flag_plot_ch_allocation, num_channels_system,...
+    path_loss_model, carrier_frequency, sinr_isolation)
 
+disp(' ')
 disp('System configuration')
 disp([' - Access protocol: ' LABELS_DICTIONARY_ACCESS_PROTOCOL(access_protocol_type + 1,:)])
 disp([' - DSA policy: ' LABELS_DICTIONARY_DSA_POLICY(dsa_policy_type,:)])
+disp([' - Path loss model: ' LABELS_DICTIONARY_PATH_LOSS(path_loss_model,:)])
 
 %% Global states
 % Identify global states (PSI) according medium access protocol requirements
@@ -111,8 +137,9 @@ disp([' - Global states identified! There are ' num2str(num_global_states) ' glo
 % Compute the power perceived by each WLAN in every channel in every global state [dBm]
 
 disp(' ')
-disp('Computing sensed powers (Power_PSI). It may take some minutes :) ...')
-Power_PSI_cell = compute_sensed_power( wlans, num_global_states, num_channels_system, PSI_cell, path_loss_model);
+disp('Computing interference sensed power by the STAs in every state (Power_PSI). It may take some minutes :) ...')
+Power_PSI_cell = compute_sensed_power( wlans, num_global_states, num_channels_system, PSI_cell, path_loss_model,...
+    carrier_frequency);
 disp(' - Sensed power computed!')
 
 %% Feasible states
@@ -141,10 +168,11 @@ disp(p_equilibrium)
 disp(['  - Reversible Markov chain? ' num2str(Q_is_reversible) ' (error: ' num2str(error_reversible) ')'])
 
 [prob_tx_num_channels_success, prob_tx_num_channels_unsuccess] = get_probability_tx_in_n_channels(Power_PSI_cell,...
-    S_cell, PSI_cell, num_wlans, num_channels_system, p_equilibrium, path_loss_model, distance_ap_sta, wlans);
+    S_cell, PSI_cell, num_wlans, num_channels_system, p_equilibrium, path_loss_model, distance_ap_sta, wlans,...
+    carrier_frequency);
 disp('  - Probability of transmitting SUCCESSFULLY in num channels (0:num_channels_system): ')
 disp(prob_tx_num_channels_success)
-disp('  - Probability of transmitting UNSUCCESSFULLY in num channels (0:num_channels_system): ')
+disp('  - Probability of transmitting UNSUCCESSFULLY (i.e. packet losses) in num channels (0:num_channels_system): ')
 disp(prob_tx_num_channels_unsuccess)
 
 [prob_dominant, dominant_state_ix] = max(p_equilibrium);

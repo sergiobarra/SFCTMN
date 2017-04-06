@@ -19,9 +19,20 @@ function [ range ] = compute_node_com_range(path_loss_model, power_tx, sensitivi
         case PATH_LOSS_FREE_SPACE
             range = (10^((power_tx-sensitivity + Gtx + Grx)/20) * LIGHT_SPEED)/(4*pi*f);
         case PATH_LOSS_URBAN_MACRO
-            range = 10^((power_tx - sensitivity - 8 -21 * log10(f/900E6) + Gtx + Grx)/37.6);
+            range = 10^((power_tx - sensitivity - 8 - 21 * log10(f/900E6) + Gtx + Grx)/37.6);
         case PATH_LOSS_URBAN_MICRO
-             range = 10^((power_tx - sensitivity - 23.3 -21 * log10(f/900E6) + Gtx + Grx)/37.6);
+            range = 10^((power_tx - sensitivity - 23.3 -21 * log10(f/900E6) + Gtx + Grx)/37.6);
+        
+        case PATH_LOSS_INDOOR_SHADOWING
+            
+            % Hardcoded for power_tx = 15 dBm, CCA = -82 dBm in 5GHz
+            range = 20;
+            
+        case PATH_LOSS_AX_RESIDENTIAL
+            
+            % Hardcoded for power_tx = 15 dBm, CCA = -82 dBm in 5GHz
+            range = 40;
+            
         otherwise
              error('Unknwown path loss model!')
     end

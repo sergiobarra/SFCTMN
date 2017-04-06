@@ -1,7 +1,8 @@
 %%% Author: Sergio Barrachina (sergio.barrachina@upf.edu)
 %%% File description: function for displaying WLANs' input info
 
-function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_plot_ch_allocation, num_channels_system )
+function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_plot_ch_allocation, num_channels_system, ...
+        path_loss_model, carrier_frequency, sinr_isolation)
     %DISPLAY_WLANS displays WLANs' input info
     % Input:
     %   - wlans: array of structures with wlans info
@@ -9,11 +10,14 @@ function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_p
     %   - flag_display_wlans: flag for displaying WLANs' info
     %   - flag_plot_ch_allocation: flag for plotting WLANs' channel allocation
     %   - num_channels_system: number of channels in the system
+    %   - path_loss_model: path loss model
+    %   - carrier_frequency: carrier frequency 
+    %   - sinr_isolation: ideal SINR when WLAN is isolated
     
     load('constants.mat');  % Load constants into local workspace
     
     num_wlans = length(wlans);  % Number of WLANs in the system
-    
+        
     % Display WLANs' info
     if flag_display_wlans
         
@@ -22,13 +26,17 @@ function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_p
         for wlan_ix = 1 : num_wlans
 
             disp(['  - wlan ' LABELS_DICTIONARY(wlans(wlan_ix).code) ':'])
-            disp(['    · primary ch: '  num2str(wlans(wlan_ix).primary)])
-            disp(['    · range: '  num2str(wlans(wlan_ix).range(1)) ' - ' num2str(wlans(wlan_ix).range(2))])
-            disp(['    · num nodes: '  num2str(wlans(wlan_ix).num_nodes)])
-            disp(['    · position: ('  num2str(wlans(wlan_ix).position(1)) ', ' num2str(wlans(wlan_ix).position(2))...
-                ', ' num2str(wlans(wlan_ix).position(3)) ')'])
-            disp(['    · tx power: '  num2str(wlans(wlan_ix).tx_power) ' dBm'])
+            disp(['    · primary channel: '  num2str(wlans(wlan_ix).primary)])
+            disp(['    · channel range: '  num2str(wlans(wlan_ix).range(1)) ' - ' num2str(wlans(wlan_ix).range(2))])
+            disp('    · positions:')
+            disp(['      * ap: ('  num2str(wlans(wlan_ix).position_ap(1)) ', ' num2str(wlans(wlan_ix).position_ap(2))...
+                ', ' num2str(wlans(wlan_ix).position_ap(3)) ') m'])
+            disp(['      * sta: ('  num2str(wlans(wlan_ix).position_sta(1)) ', ' num2str(wlans(wlan_ix).position_sta(2))...
+                ', ' num2str(wlans(wlan_ix).position_sta(3)) ') m'])
+            disp(['    · Transmission power: '  num2str(wlans(wlan_ix).tx_power) ' dBm'])
             disp(['    · CCA level: '  num2str(wlans(wlan_ix).cca) ' dBm'])
+            disp(['       * SINR isolated: '  num2str(sinr_isolation) ' dB'])
+            disp(['    · lambda: '  num2str(wlans(wlan_ix).lambda) ' packets/s'])
         end
     end
     
@@ -41,13 +49,13 @@ function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_p
         for wlan_ix = 1 : num_wlans
             
             % Plot AP
-            scatter(wlans(wlan_ix).position(1), wlans(wlan_ix).position(2), CTMC_NODE_SIZE/2,...
+            scatter(wlans(wlan_ix).position_ap(1), wlans(wlan_ix).position_ap(2), CTMC_NODE_SIZE/2,...
                 'MarkerEdgeColor',[0 0 0], 'MarkerFaceColor', COLORS_DICTIONARY(wlan_ix,:));
 
             % Plot communication range
-            r = compute_node_com_range(PATH_LOSS_FREE_SPACE, wlans(wlan_ix).tx_power, wlans(wlan_ix).cca,...
-                GAIN_TX_DEFAULT, GAIN_RX_DEFAULT, FREQUENCY);
-            c = [wlans(wlan_ix).position(1) wlans(wlan_ix).position(2)];    
+            r = compute_node_com_range(path_loss_model, wlans(wlan_ix).tx_power, wlans(wlan_ix).cca,...
+                GAIN_TX_DEFAULT, GAIN_RX_DEFAULT, carrier_frequency);
+            c = [wlans(wlan_ix).position_ap(1) wlans(wlan_ix).position_ap(2)];    
             t = linspace(0, 2*pi);
             x = r*cos(t) + c(1);
             y = r*sin(t) + c(2);
@@ -56,7 +64,7 @@ function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_p
                 COM_RANGE_TRANSPARENCY);
 
             axis equal
-            text(wlans(wlan_ix).position(1), wlans(wlan_ix).position(2), LABELS_DICTIONARY(wlan_ix));
+            text(wlans(wlan_ix).position_ap(1), wlans(wlan_ix).position_ap(2), LABELS_DICTIONARY(wlan_ix));
 
         end
 

@@ -3,7 +3,7 @@
 %%% File description: function for computing the sensed power of each WLAN in every channel in every global state.
 
 function [ Power_PSI_cell ] = compute_sensed_power( wlans, num_global_states, num_channels_system, PSI_cell,...
-        path_loss_model)
+        path_loss_model, carrier_frequency)
     %COMPUTE_SENSED_POWER computes the sensed power of each WLAN in every channel in every global state. 
     % Input:
     %   - wlans: array of structures with wlans info
@@ -12,6 +12,7 @@ function [ Power_PSI_cell ] = compute_sensed_power( wlans, num_global_states, nu
     %   - PSI_cell: set of global states in cell array form
     %   - path_loss_model: path loss model
     %   - d_sta: distance between AP and STAs inside the same WLAN
+    %   - carrier_frequency: carrier frequency
     
     load('constants.mat');  % Load constants into local workspace
     
@@ -42,15 +43,18 @@ function [ Power_PSI_cell ] = compute_sensed_power( wlans, num_global_states, nu
                         
                         if PSI_cell{psi_ix}(w_aux,c) % If wlan_aux transmitting in state s
                             
-                            distance_w_waux = pdist([wlans(wlan_ix).position(1) wlans(wlan_ix).position(2);...
-                                wlans(w_aux).position(1) wlans(w_aux).position(2)] ,'euclidean');
+                            pos_wlan = wlans(wlan_ix).position_ap;
+                            pos_wlan_aux = wlans(w_aux).position_ap;
+                            
+                            distance_w_waux = pdist([pos_wlan(1) pos_wlan(2) pos_wlan(3);...
+                                pos_wlan_aux(1) pos_wlan_aux(2) pos_wlan_aux(3)] ,'euclidean');
                             
                             % Transmission power must be divided by the number of channels 
                             [~, ~, ~, num_channels, ~] = get_channel_range( PSI_cell{psi_ix}(w_aux,:) );
                             tx_power = wlans(w_aux).tx_power - 3*(num_channels - 1);    % 3dB less
 
                             pw_rx_dBm = compute_power_received(distance_w_waux, tx_power,...
-                                GAIN_TX_DEFAULT, GAIN_RX_DEFAULT, FREQUENCY, path_loss_model);
+                                GAIN_TX_DEFAULT, GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);
                             
                             pw_rx_linear = 10^(pw_rx_dBm/10);
                             sum_power_rx_linear = sum_power_rx_linear + pw_rx_linear;

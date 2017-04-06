@@ -3,20 +3,23 @@
 %%% File description: constant parameters to be used by different matlab scripts
 
 % Input
-INPUT_NUM_FIELDS = 8;                           % Index of code in the input file
 INPUT_FIELD_IX_CODE = 1;                        % Index of code in the input file
 INPUT_FIELD_PRIMARY_CH = 2;                     % Index of primary channel in the input file
 INPUT_FIELD_LEFT_CH = 3;                        % Index of left channel in the input file
 INPUT_FIELD_RIGHT_CH = 4;                       % Index of right channel in the input file
-INPUT_FIELD_NUM_NODES = 5;                      % Index of number of nodes in the input file
-INPUT_FIELD_POS_X = 6;                          % Index of pos X in the input file
-INPUT_FIELD_POS_Y = 7;                          % Index of pos Y in the input file
-INPUT_FIELD_POS_Z = 8;                          % Index of pos Z in the input file
-INPUT_FIELD_TX_POWER = 9;                       % Index of pos Y in the input file
-INPUT_FIELD_CCA = 10;                           % Index of pos Z in the input file
-INPUT_FIELD_LAMBDA = 11;                        % Index of lambda in the input file
+INPUT_FIELD_TX_POWER = 5;                       % Index of transmission power
+INPUT_FIELD_CCA = 6;                            % Index of the CCA
+INPUT_FIELD_LAMBDA = 7;                         % Index of lambda in the input file
+INPUT_FIELD_POS_AP_X = 8;                       % Index of pos X in the input file
+INPUT_FIELD_POS_AP_Y = 9;                       % Index of pos Y in the input file
+INPUT_FIELD_POS_AP_Z = 10;                      % Index of pos Z in the input file
+INPUT_FIELD_POS_STA_X = 11;                     % Index of pos X in the input file
+INPUT_FIELD_POS_STA_Y = 12;                     % Index of pos Y in the input file
+INPUT_FIELD_POS_STA_Z = 13;                     % Index of pos Z in the input file
+
 
 % System configuration
+LABELS_DICTIONARY_PATH_LOSS = ['Free Space ';'Urban Macro';'Urban Pico ';'In-door sh.';'8011ax Res.'];
 LABELS_DICTIONARY_ACCESS_PROTOCOL = ['Log2maps';'Adjacent';'IE802.11'];
 LABELS_DICTIONARY_DSA_POLICY = ['Aggressive';'OnlyMax   ';'ExplorerUn';'ExplorerLa'];
 
@@ -58,11 +61,14 @@ CAPTURE_EFFECT = 10;                            % Capture effect [dB]
 POWER_TX_DEFAULT = 15;                          % Transmission power [dBm]
 GAIN_TX_DEFAULT = 0;                            % Transmitter gain [dB]
 GAIN_RX_DEFAULT = 0;                            % Receiver gain [dB]
-PATH_LOSS_FREE_SPACE = 0;                       % Free space path loss model
-PATH_LOSS_URBAN_MACRO = 1;                      % Urban macro deployment  (http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6167392)
-PATH_LOSS_URBAN_MICRO = 2;                      % Pico/hotzone deployment
+
+PATH_LOSS_FREE_SPACE = 1;                       % Free space path loss model
+PATH_LOSS_URBAN_MACRO = 2;                      % Urban macro deployment  (http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6167392)
+PATH_LOSS_URBAN_MICRO = 3;                      % Pico/hotzone deployment
+PATH_LOSS_INDOOR_SHADOWING = 4;                 % WLAN indorr path loss model
+PATH_LOSS_AX_RESIDENTIAL = 5;                   % % Retrieved from: https://mentor.ieee.org/802.11/dcn/14/11-14-0882-04-00ax-tgax-channel-model-document.docx
+
 LIGHT_SPEED = 3E8;                              % Speed of light [m/s]
-FREQUENCY = 2.4E9;                              % Carrier frequency [MHz] WiFi 2.4 GHz
 NOISE_DBM = -100;                               % Ambient noise [dBm]
 
 save('constants.mat');  % Save constants into current folder

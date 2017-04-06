@@ -3,7 +3,7 @@
 %%% File description: function for finding the probability of WLANs to tranmsit successfully in any number of channels
 
 function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] = get_probability_tx_in_n_channels( Power_PSI_cell, S_cell, PSI_cell, ...
-        num_wlans, num_channels_system, p_equilibrium, path_loss_model,  distance_ap_sta, wlans )
+        num_wlans, num_channels_system, p_equilibrium, path_loss_model,  distance_ap_sta, wlans , carrier_frequency)
     %GET_PROBABILITY_TX_IN_N_CHANNELS returns the probability of transmitting in a given number of channels
     % Input:
     %   - Power_PSI_cell: power sensed by every wlan in every channel in every global state [dBm]
@@ -15,6 +15,7 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
     %   - path_loss_model: path loss model
     %   - distance_ap_sta: distance between the AP and STAs of a WLAN
     %   - wlans: array of structures with wlans info
+    %   - carrier_frequency: carrier frequency [Hz]
     % Output:
     %   - prob_tx_in_num_channels: array whose element w,n is the probability of WLAN w of transmiting in n channels
    
@@ -28,13 +29,13 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
 
     for s_ix = 1 : S_num_states
         
-        disp(['- state: ' num2str(s_ix)])
+%         disp(['- state: ' num2str(s_ix)])
         
         pi_s = p_equilibrium(s_ix); % probability of being in state s
 
         for wlan_ix = 1 : num_wlans
             
-            disp(['  · wlan: ' num2str(wlan_ix)])
+%             disp(['  · wlan: ' num2str(wlan_ix)])
             
             % Number of channels used by WLAN wlan in state s
             [left_ch, right_ch, is_wlan_active ,num_channels] = get_channel_range(S_cell{s_ix}(wlan_ix,:));
@@ -50,20 +51,16 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
                     
                     [ ~, psi_s_ix ] = find_state_in_set( S_cell{s_ix}, PSI_cell );
                     
-                    interest_power_mw = 10^(compute_power_received(distance_ap_sta, wlans(wlan_ix).tx_power, GAIN_TX_DEFAULT,...
-                        GAIN_RX_DEFAULT, FREQUENCY, path_loss_model)/10);
-          
-                    interference_power_mw = 10^(Power_PSI_cell{psi_s_ix}(wlan_ix,ch_ix)/10);
+                    interest_power = compute_power_received(distance_ap_sta, wlans(wlan_ix).tx_power, GAIN_TX_DEFAULT,...
+                        GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);
+                   
+                    interference_power = Power_PSI_cell{psi_s_ix}(wlan_ix,ch_ix);
                     
-                    noise_power_mw = 10^(NOISE_DBM/10);
+                    sinr = compute_sinr(interest_power, interference_power, NOISE_DBM);
                     
-                    sinr_linear = interest_power_mw / (interference_power_mw + noise_power_mw);
+%                     disp(['    * sinr(ch = ' num2str(ch_ix) ') = ' num2str(sinr)])
                     
-                    sinr_db = 10 * log10(sinr_linear);
-                    
-                    disp(['    * sinr(ch = ' num2str(ch_ix) ') = ' num2str(sinr_db)])
-                    
-                    if sinr_db < CAPTURE_EFFECT
+                    if sinr < CAPTURE_EFFECT
                         capture_effect_accomplished = false;
                     end
                 end
