@@ -39,7 +39,7 @@ MU = [81.5727 150.8068 0 215.7497 0 0 0 284.1716];  % Packet departure rate depe
 DSA_POLICY_AGGRESSIVE = 1;                      % DSA policy for picking always the maximum channel width available
 DSA_POLICY_ONLY_MAX = 2;                        % DSA policy for picking only the whole available range when possible
 DSA_POLICY_EXPLORER_UNIFORM = 3;                % DSA policy for picking one of the ranges found free uniformly
-DSA_POLICY_EXPLORER_LADDER = 4;                  % DSA policy for picking one of the range found free depending on weights
+DSA_POLICY_EXPLORER_LADDER = 4;                 % DSA policy for picking one of the range found free depending on weights
 
 % Figure settings
 CTMC_NODE_SIZE = 500;                           % Node size (circle)
@@ -57,7 +57,7 @@ PACKET_LENGTH = 12000;                          % Packet length [bits]
 
 % Power
 CCA_DEFAULT = -82;                              % CCA level [dBm]
-CAPTURE_EFFECT = 10;                            % Capture effect [dB]
+CAPTURE_EFFECT = 5;                            % Capture effect [dB]
 POWER_TX_DEFAULT = 15;                          % Transmission power [dBm]
 GAIN_TX_DEFAULT = 0;                            % Transmitter gain [dB]
 GAIN_RX_DEFAULT = 0;                            % Receiver gain [dB]

@@ -125,7 +125,7 @@ function [ PSI_cell, num_global_states, PSI ] = identify_global_states( wlans, n
         end
     end
 
-    % Use Alessandro's function for generating global states parting from WLAN own global states
+    % Use Alessandro's function for generating global states starting from WLAN own global states
     PSI_alessandro = create_global_states(wlans);   
     num_global_states = size(PSI_alessandro.states,1);
     
