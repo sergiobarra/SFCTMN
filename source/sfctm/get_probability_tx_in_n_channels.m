@@ -24,6 +24,7 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
     %   - prob_tx_in_num_channels: array whose element w,n is the probability of WLAN w of transmiting in n channels
    
     load('constants.mat');  % Load constants into workspace
+    load('system_conf.mat');    % Load constants into workspace
     
     S_num_states = length(S_cell);  % Number of feasible states
 
