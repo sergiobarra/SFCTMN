@@ -34,6 +34,7 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_a
     if logs_algorithm_on
         disp(' ');
         disp('--- IDENTIFYING FEASIBLE STATES (S) ---');
+        transitions_counter = 0;    % Number of transitions detected by the algorithm
     end
     
     num_global_states = length(PSI_cell);   % Number of global states
@@ -56,7 +57,7 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_a
         for wlan_ix = 1 : num_wlans     % Foreach WLAN
 
             % Determine if wlan is active in state s
-            wlan_ch_range = S_cell{k}(wlan_ix,:);    % Channel range of WLAN wlan in state s
+            wlan_ch_range = S_cell{k}(wlan_ix,:);    % Channel range of WLAN wlan_ix in state s
             [~, ~, wlan_active_in_s] = get_channel_range(wlan_ch_range);
             
             % If wlan is ACTIVE in s ---> set backward transitions to known and unknown states
@@ -123,9 +124,13 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_a
                         T_PSI(origin_psi_ix, destination_psi_ix) = BACKWARD_TRANSITION;
 
                         if logs_algorithm_on
-                            disp(['   * New backward transition from s' num2str(origin_s_ix)...
-                                ' (s_psi #'  num2str(origin_psi_ix) ') to ' num2str(destination_s_ix)...
+                            
+                            transitions_counter = transitions_counter + 1;
+                            
+                            disp(['   * New backward transition (#' num2str(transitions_counter) ') from s' num2str(origin_s_ix)...
+                                ' (s_psi #'  num2str(origin_psi_ix) ') to s' num2str(destination_s_ix)...
                                 ' (s_psi #' num2str(destination_psi_ix) ')']);
+                            
                         end
                     end
                 end
@@ -220,7 +225,8 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_a
                             Q(origin_s_ix, destination_s_ix) = alfa(psi_forward_aux_ix) * wlans(wlan_ix).lambda;
 
                             if logs_algorithm_on
-                                disp(['   * New forward transition from s' num2str(origin_s_ix)...
+                                transitions_counter = transitions_counter + 1;
+                                disp(['   * New forward transition (#' num2str(transitions_counter) ') from s' num2str(origin_s_ix)...
                                     ' (s_psi #' num2str(origin_psi_ix) ') to s' num2str(destination_s_ix)...
                                     ' (s_psi #' num2str(destination_psi_ix) ')']);
                             end

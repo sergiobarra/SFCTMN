@@ -50,15 +50,15 @@ function  [S,p]=ExampleFourWLANs()
     end
 
     % [SERGIO] Primary channel. WLAN, if TXing, would user at least primary channel.
-    wlan(1).primary = 1;
-    wlan(2).primary = 4;
-    wlan(3).primary = 2;
-    wlan(4).primary = 3;
+    wlan(1).primary = 5;
+    wlan(2).primary = 2;
+    wlan(3).primary = 4;
+    wlan(4).primary = 8;
     % [SERGIO] WLAN channel range. Available channels.
-    wlan(1).range = [1 2];
-    wlan(2).range = [1 4];
-    wlan(3).range = [2 2];
-    wlan(4).range = [3 4];
+    wlan(1).range = [1 8];
+    wlan(2).range = [1 2];
+    wlan(3).range = [3 4];
+    wlan(4).range = [7 8];
 
     onlymax = true; % ALEX false to allow also intermediate widths
     selfloop = false; % ALEX reversible case

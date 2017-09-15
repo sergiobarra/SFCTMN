@@ -15,9 +15,11 @@ carrier_frequency = 2.4E9;                          % Carrier frequency [MHz] (2
 NOISE_DBM = -100;                                   % Ambient noise [dBm]
 
 % DSA policy type
-dsa_policy_type = DSA_POLICY_AGGRESSIVE;
-% dsa_policy_type = DSA_POLICY_ONLY_MAX;
-% dsa_policy_type = DSA_POLICY_EXPLORER_UNIFORM;
+dsa_policy_type = DSA_POLICY_AGGRESSIVE;          % Always-max
+% dsa_policy_type = DSA_POLICY_ONLY_MAX;              % SCB
+% dsa_policy_type = DSA_POLICY_ONLY_PRIMARY;          % Only-primary
+% dsa_policy_type = DSA_POLICY_EXPLORER_UNIFORM;    % Probabilistic uniform
 % dsa_policy_type = DSA_POLICY_EXPLORER_LADDER;
 
 save('system_conf.mat');  % Save system configuration into current folder
+disp('System configuration saved in file system_conf.mat')

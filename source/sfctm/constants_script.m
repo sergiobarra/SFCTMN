@@ -34,7 +34,7 @@ INPUT_FIELD_POS_STA_Z = 13;                     % Index of pos Z in the input fi
 % Labels
 LABELS_DICTIONARY_PATH_LOSS = ['Free Space ';'Urban Macro';'Urban Pico ';'In-door sh.';'8011ax Res.'];
 LABELS_DICTIONARY_ACCESS_PROTOCOL = ['Log2maps';'Adjacent';'IE802.11'];
-LABELS_DICTIONARY_DSA_POLICY = ['Aggressive';'OnlyMax   ';'ExplorerUn';'ExplorerLa'];
+LABELS_DICTIONARY_DSA_POLICY = ['Aggressive';'OnlyMax   ';'ExplorerUn';'ExplorerLa'; 'OnlyPrim  '];
 
 % CTMC
 FORWARD_TRANSITION = 1;                         % CTMC forward transition
@@ -53,6 +53,7 @@ DSA_POLICY_AGGRESSIVE = 1;                      % DCB policy for picking always 
 DSA_POLICY_ONLY_MAX = 2;                        % DCB policy for picking only the whole available range when possible
 DSA_POLICY_EXPLORER_UNIFORM = 3;                % DCB policy for picking one of the ranges found free uniformly
 DSA_POLICY_EXPLORER_LADDER = 4;                 % DCB policy for picking one of the range found free depending on weights
+DSA_POLICY_ONLY_PRIMARY = 5;                    % DCB policy for picking just the primary channel when found free
 
 % Figure settings
 CTMC_NODE_SIZE = 500;                           % Node size (circle)

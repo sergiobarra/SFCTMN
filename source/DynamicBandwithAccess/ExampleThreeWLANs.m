@@ -40,7 +40,7 @@ function  [S,p]=ExampleThreeWLANs()
     mu(4)=1/(Ts4);
     
     % [SERGIO] Number of channels in the medium
-    n_chan = 2;% optional it can be omitted (default is 19) IT CAN SPEED UP COMPUTATION IS CHANNELS ARE NOT USED
+    n_chan = 4;% optional it can be omitted (default is 19) IT CAN SPEED UP COMPUTATION IS CHANNELS ARE NOT USED
     
     disp('lambda [1/s]: ');
     disp(lambda);
@@ -51,12 +51,12 @@ function  [S,p]=ExampleThreeWLANs()
     
     % [SERGIO] Primary channel. WLAN, if TXing, would user at least primary channel.
     wlan(1).primary = 1;
-    wlan(2).primary = 1;
-    wlan(3).primary = 1;
+    wlan(2).primary = 2;
+    wlan(3).primary = 4;
     % [SERGIO] WLAN channel range. Available channels.
     wlan(1).range = [1 1];
-    wlan(2).range = [1 1];
-    wlan(3).range = [1 2];
+    wlan(2).range = [1 4];
+    wlan(3).range = [3 4];
     
     onlymax = true; % ALEX false to allow also intermediate widths
     selfloop = false; % ALEX reversible case
