@@ -34,7 +34,7 @@ flag_display_throughput = true;     % Flag for displaying the throughput
 flag_plot_PSI_ctmc = false;          % Flag for plotting PSI's CTMC
 flag_plot_S_ctmc = true;           % Flag for plotting S' CTMC
 flag_plot_wlans = false;            % Flag for plotting WLANs' distribution
-flag_plot_ch_allocation = true;    % Flag for plotting WLANs' channel allocation
+flag_plot_ch_allocation = false;    % Flag for plotting WLANs' channel allocation
 flag_plot_throughput = false;        % Flag for plotting the throughput
 
 % - Logs
@@ -78,8 +78,8 @@ filename = '../../input/wlans_input.csv';   % Path to WLAN input file
 %
 if flag_hardcode_distances
     disp([LOG_LVL3 'HARDCODING DISTANCES FOR CONVENIENCE!'])
-    distance_ap_sta = 0.1;
-    distance_ap_ap = 50;
+    distance_ap_sta = 1;
+    distance_ap_ap = 350;
     for w = 1 : num_wlans
         wlans(w).position_ap = [((w - 1) * distance_ap_ap) 0 0];
         wlans(w).position_sta = wlans(w).position_ap + [0 -distance_ap_sta 0];

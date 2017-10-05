@@ -20,6 +20,7 @@ function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_p
     %   - sinr_isolation: ideal SINR when WLAN is isolated (just considering ambient noise)
     
     load('constants.mat');  % Load constants into local workspace
+    load('system_conf.mat');  % Load system configuration into local workspace
     
     num_wlans = length(wlans);  % Number of WLANs in the system
         

@@ -53,7 +53,7 @@ function  [S,p]=ExampleTwoWLANs()
     wlan(2).primary = 2;
     % [SERGIO] WLAN channel range. Available channels.
     wlan(1).range = [1 2];
-    wlan(2).range = [2 2];
+    wlan(2).range = [1 2];
     
     onlymax = true; % ALEX false to allow also intermediate widths
     selfloop = false; % ALEX reversible case

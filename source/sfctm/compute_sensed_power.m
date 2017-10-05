@@ -18,7 +18,8 @@ function [ Power_PSI_cell ] = compute_sensed_power( wlans, num_global_states, nu
     %   - d_sta: distance between AP and STAs inside the same WLAN
     %   - carrier_frequency: carrier frequency
     
-    load('constants.mat');  % Load constants into local workspace
+    load('system_conf.mat');  % Load constants into local workspace
+    load('system_conf.mat');  % Load system configuration into local workspace    
     
     % Set of powers [dBm] sensed in cell array form. Item {s}(w,c) is the power sensed by WLAN w in channel c in state s.
     Power_PSI_cell = {};

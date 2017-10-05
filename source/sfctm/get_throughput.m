@@ -16,6 +16,7 @@ function [ throughput ] = get_throughput( prob_tx_in_num_channels, num_wlans, nu
     %   - throughput: array whose element w is the average throughput of WLAN w.
     
     load('constants.mat');  % Load constants into local workspace
+    load('system_conf.mat');  % Load system configuration into local workspace
 
     throughput = zeros(num_wlans,1);
     
@@ -24,8 +25,17 @@ function [ throughput ] = get_throughput( prob_tx_in_num_channels, num_wlans, nu
         throughput(wlan_ix) = 0;    
         
         for num_ch = 1 : num_channels_system
+            
+            % Sergio on 5 Oct 2017: 
+            % - replace hardocoded MU by 802.11ax data rate:
+            % - throughput(wlan_ix) = throughput(wlan_ix) + (1 - PACKET_ERR_PROBABILITY) * NUM_PACKETS_AGGREGATED *...
+            %    PACKET_LENGTH * (MU(num_ch) * prob_tx_in_num_channels(wlan_ix, num_ch + 1)) ./ 1E6;
+            
+            mu = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, num_ch * 20,...
+                            SINGLE_USER_SPATIAL_STREAMS,MCS_INDEX);
+            
             throughput(wlan_ix) = throughput(wlan_ix) + (1 - PACKET_ERR_PROBABILITY) * NUM_PACKETS_AGGREGATED *...
-                PACKET_LENGTH * (MU(num_ch) * prob_tx_in_num_channels(wlan_ix, num_ch + 1)) ./ 1E6;
+                PACKET_LENGTH * (mu * prob_tx_in_num_channels(wlan_ix, num_ch + 1)) ./ 1E6;
         end
     end
 end

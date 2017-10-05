@@ -32,7 +32,8 @@ function [ wlans, num_channels_system, num_wlans ] = generate_wlans( wlan_input_
             input_data(w,INPUT_FIELD_POS_STA_Z)];                       % Pick STA positions
         wlans(w).tx_power = input_data(w,INPUT_FIELD_TX_POWER);     % Pick transmission power
         wlans(w).cca = input_data(w,INPUT_FIELD_CCA);               % Pick CCA level
-        wlans(w).lambda = input_data(w,INPUT_FIELD_LAMBDA);         % Pick lambda
+        EB = (input_data(w,INPUT_FIELD_CW)-1)/2;
+        wlans(w).lambda = 1/(EB * TIME_SLOT);         % Pick lambda
         wlans(w).states = [];   % Instantiate states for later use          
         wlans(w).widths = [];   % Instantiate acceptable widhts item for later use
 

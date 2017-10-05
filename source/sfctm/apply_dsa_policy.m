@@ -21,6 +21,7 @@ function [ psi_forward, alpha ] = apply_dsa_policy( dsa_policy, possible_forward
     %   - alpha: array of transition rate tunning parameters
     
     load('constants.mat');  % Load constants into workspace
+    load('system_conf.mat');  % Load system configuration into local workspace
     
     num_possible_forward_states = length(possible_forward_states(:,1)); % Number of possible states to transit forward
     psi_forward = [];        % State (or states) to transit forward to (it is determined by the DSA policy)
