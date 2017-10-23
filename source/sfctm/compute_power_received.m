@@ -68,7 +68,6 @@ function [ power_rx ] = compute_power_received(distance, power_tx, G_tx, G_rx, f
         otherwise
              error('Unknwown path loss model!')
     end
-    disp(loss)
     power_rx = power_tx + G_rx + G_tx - loss;
     
 end

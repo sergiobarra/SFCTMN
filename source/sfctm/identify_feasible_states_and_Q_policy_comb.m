@@ -1,35 +1,14 @@
-%%% *********************************************************************
-%%% * Spatial-Flexible CTMN for WLANs                                   *
-%%% * Author: Sergio Barrachina-Munoz (sergio.barrachina@upf.edu)       *
-%%% * Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
-%%% * GitHub repository: https://github.com/sergiobarra/SFCTMN          *
-%%% * More info on https://www.upf.edu/en/web/sergiobarrachina          *
-%%% *********************************************************************
 
-function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_and_Q( PSI_cell, Power_PSI_cell,...
-        num_channels_system, wlans, dsa_policy, logs_algorithm_on )
-    %IDENTIFY_FEASIBLE_STATES function for finding the feasible state space (S) and transition rate matrix (Q) of a 
-    % given WLAN system taking the power sensed in the interest spectrum into consideration. This algorithm is an 
-    % extension to allow non-fully overlapping networks of "Faridi, Azadeh, Boris Bellalta, and Alessandro Checco. 
-    % "Analysis of dynamic channel bonding in dense networks of WLANs." IEEE Transactions on Mobile Computing 16.8 
-    % (2017): 2118-2131. 
-    %
-    % Input:
-    %   - PSI_cell: set of global states in cell array form
-    %   - Power_PSI_cell: power sensed by every wlan in every channel in every global state [dBm]
-    %   - num_channels_system: number of channels in the system
-    %   - wlans: array of structures with wlans info
-    %   - dsa_policy: type of DSA-DCB policy. It determines what channel range to pick depending on the sensed power
-    %   - logs_on: flag for activating or deactivating logs
-    % Output:
-    %   - Q: S's CTMC transition rate matrix
-    %   - S: 3d matrix representing the feasible states
-    %   - S_cell: cell array representing the feasible states
-    %   - T_S: logical transition rates matrix in feasible space (just backward and forward transitions identified)
-    %   - T_PSI: logical transition rates matrix in global space
-    %   - S_num_states: number of feasible states 
+% Sergio on 23/10/2017
+% - Hardcoded for paper 3: finding scenario where WLANs have different optimal policies
+% - There are 3 WLANs that can pick 4 policies (AM, SCB, OP, PU).
+% - Therefore, there are 64 possible combinations
+
+function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_and_Q_policy_comb( PSI_cell, Power_PSI_cell,...
+        num_channels_system, wlans, dsa_policy_vector, logs_algorithm_on )
     
     load('constants.mat');  % Load constants into workspace
+    load('system_conf.mat');    % Load system configuration
     
     if logs_algorithm_on
         disp(' ');
@@ -120,6 +99,8 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_a
                         % Departure rate of WLAN wlan in current state s
                         % - Sergio on 5 Oct 2017, replace hardcoded mu by 802.11ax computation
                         % - mu_s = MU(num_ch_wlan_s);
+                        mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, num_ch_wlan_s * 20,...
+                            SINGLE_USER_SPATIAL_STREAMS,MCS_INDEX);
                         
                         Q(origin_s_ix, destination_s_ix) = mu_s;
                         T_PSI(origin_psi_ix, destination_psi_ix) = BACKWARD_TRANSITION;
@@ -187,7 +168,7 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_a
                 if ~isempty(possible_forward_states) 
                                        
                     % State to transit forward to (psi_forward) depends on the DSA policy applied
-                    [psi_forward alfa] = apply_dsa_policy( dsa_policy, possible_forward_states, Power_PSI_cell, wlans, wlan_ix);
+                    [psi_forward alfa] = apply_dsa_policy( dsa_policy_vector(wlan_ix), possible_forward_states, Power_PSI_cell, wlans, wlan_ix);
 
                     if ~isempty(psi_forward)  % If there is a global state to transit to from current state s
                         

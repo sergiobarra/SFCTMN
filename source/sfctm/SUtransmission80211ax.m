@@ -22,9 +22,7 @@ function [T,T_c]=SUtransmission80211ax(L,Na,W,SUSS,MCSindex)
   
   Rate = Nsc * Ym * Yc * SUSS;
   Rate_20MHz = 52 * Ym * Yc; % In legacy mode
-  
-  disp([Nsc Ym Yc]);
-  
+    
   % Duplicate RTS/CTS for bandwidth allocation
   T_RTS  = Legacy_PHYH + ceil((L_SF+L_RTS+L_TAIL)/Rate_20MHz)*T_OFDM;
   T_CTS  = Legacy_PHYH + ceil((L_SF+L_CTS+L_TAIL)/Rate_20MHz)*T_OFDM;

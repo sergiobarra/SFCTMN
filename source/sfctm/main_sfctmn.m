@@ -34,7 +34,7 @@ flag_display_throughput = true;     % Flag for displaying the throughput
 flag_plot_PSI_ctmc = false;          % Flag for plotting PSI's CTMC
 flag_plot_S_ctmc = true;           % Flag for plotting S' CTMC
 flag_plot_wlans = false;            % Flag for plotting WLANs' distribution
-flag_plot_ch_allocation = false;    % Flag for plotting WLANs' channel allocation
+flag_plot_ch_allocation = true;    % Flag for plotting WLANs' channel allocation
 flag_plot_throughput = false;        % Flag for plotting the throughput
 
 % - Logs
@@ -79,7 +79,7 @@ filename = '../../input/wlans_input.csv';   % Path to WLAN input file
 if flag_hardcode_distances
     disp([LOG_LVL3 'HARDCODING DISTANCES FOR CONVENIENCE!'])
     distance_ap_sta = 1;
-    distance_ap_ap = 350;
+    distance_ap_ap = 20;
     for w = 1 : num_wlans
         wlans(w).position_ap = [((w - 1) * distance_ap_ap) 0 0];
         wlans(w).position_sta = wlans(w).position_ap + [0 -distance_ap_sta 0];
@@ -131,6 +131,7 @@ disp([LOG_LVL2 'Sensed power computed!'])
 
 disp(' ')
 disp([LOG_LVL1 'Identifying feasible state space (S) and transition rate matrix (Q)...'])
+
 [ Q, S, S_cell, Q_logical_S, Q_logical_PSI, S_num_states ] = identify_feasible_states_and_Q(PSI_cell, Power_PSI_cell,...
     num_channels_system, wlans, dsa_policy_type, flag_logs_feasible_space);
 
@@ -252,6 +253,7 @@ if flag_display_throughput
     for w = 1 : num_wlans
         disp([LOG_LVL4 LABELS_DICTIONARY(w) ': ' num2str(throughput(w))]);        
     end
+    throughput'
     disp([LOG_LVL3 'Total: ' num2str(sum(throughput))]);
     disp([LOG_LVL3 'Proportional fairness: ' num2str(proportional_fairness)]);
 end

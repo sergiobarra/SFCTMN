@@ -62,9 +62,7 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
                     interference_power = Power_PSI_cell{psi_s_ix}(wlan_ix,ch_ix);
                     
                     sinr = compute_sinr(interest_power, interference_power, NOISE_DBM);
-                    
-%                     disp(['    * sinr(ch = ' num2str(ch_ix) ') = ' num2str(sinr)])
-                    
+
                     if sinr < CAPTURE_EFFECT
                         capture_effect_accomplished = false;
                     end
