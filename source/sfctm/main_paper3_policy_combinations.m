@@ -33,7 +33,7 @@ flag_display_throughput = false;     % Flag for displaying the throughput
 % - Plots
 flag_plot_PSI_ctmc = false;          % Flag for plotting PSI's CTMC
 flag_plot_S_ctmc = false;           % Flag for plotting S' CTMC
-flag_plot_wlans = false;            % Flag for plotting WLANs' distribution
+flag_plot_wlans = true;            % Flag for plotting WLANs' distribution
 flag_plot_ch_allocation = true;    % Flag for plotting WLANs' channel allocation
 flag_plot_throughput = false;        % Flag for plotting the throughput
 
@@ -133,9 +133,26 @@ disp([LOG_LVL2 'Sensed power computed!'])
 % - There are 3 WLANs that can pick 4 policies (AM, SCB, OP, PU).
 % - Therefore, there are 64 possible combinations
 
-dsa_policy_matrix = allcomb([DSA_POLICY_AGGRESSIVE DSA_POLICY_ONLY_MAX DSA_POLICY_ONLY_PRIMARY DSA_POLICY_EXPLORER_UNIFORM], ...
-    [DSA_POLICY_AGGRESSIVE DSA_POLICY_ONLY_MAX DSA_POLICY_ONLY_PRIMARY DSA_POLICY_EXPLORER_UNIFORM], ...
-    [DSA_POLICY_AGGRESSIVE DSA_POLICY_ONLY_MAX DSA_POLICY_ONLY_PRIMARY DSA_POLICY_EXPLORER_UNIFORM]);
+policies_by_wlan = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_ONLY_MAX, DSA_POLICY_ONLY_PRIMARY, DSA_POLICY_EXPLORER_UNIFORM] ...
+    .* ones(num_wlans,4);
+
+switch num_wlans
+    
+    case 2
+        dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:));
+        
+    case 3
+        dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:), policies_by_wlan(3,:));
+        
+    case 4
+        dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:), policies_by_wlan(3,:), policies_by_wlan(4,:));
+        
+    case 5
+        dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:), policies_by_wlan(3,:), policies_by_wlan(4,:), policies_by_wlan(5,:));
+        
+end
+
+
 
 throughput_by_policy_comb = zeros(size(dsa_policy_matrix,1),size(dsa_policy_matrix,2));
 total_throughput_by_policy_comb = zeros(size(dsa_policy_matrix,1),1);
@@ -145,8 +162,8 @@ fairness_by_policy_comb = zeros(size(dsa_policy_matrix,1),1);
 for comb_ix = 1:size(dsa_policy_matrix,1)
     
     disp('***********************************************************************')
-    disp(['Policy combination ' num2str(comb_ix) ': [' num2str(dsa_policy_matrix(comb_ix,1))...
-        ', ' num2str(dsa_policy_matrix(comb_ix,2)) ', ' num2str(dsa_policy_matrix(comb_ix,3)) ']'])
+    disp(['Policy combination ' num2str(comb_ix) '/' num2str(size(dsa_policy_matrix,1)) ':'])
+    disp(dsa_policy_matrix(comb_ix,:))
     
 %     [ Q, S, S_cell, Q_logical_S, Q_logical_PSI, S_num_states ] = identify_feasible_states_and_Q(PSI_cell, Power_PSI_cell,...
 %         num_channels_system, wlans, dsa_policy_type, flag_logs_feasible_space);
@@ -238,7 +255,7 @@ for comb_ix = 1:size(dsa_policy_matrix,1)
     end
     
     % Plot feasible state space CTMC
-    if flag_plot_S_ctmc
+    if comb_ix == 1
         disp([LOG_LVL2 'Plotting S CTMC...'])
         plot_ctmc(S , num_wlans, num_channels_system, 'CTMC of feasible states (S)', Q_logical_S);
         disp([LOG_LVL3 'Plotted!'])
@@ -261,24 +278,27 @@ end
 [max_fair, ix_fair] = max(fairness_by_policy_comb);
 
 
-disp(['MOST THROUGHPUT COMBINATION: ' LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_throughput,1),:)...
-    ', ' LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_throughput,2),:)...
-    ', ' LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_throughput,3),:)])
-
-disp([' - Throughput: '])
+disp('MOST THROUGHPUT COMBINATION: ')
+for wlan_ix = 1:num_wlans
+    disp([LOG_LVL4 LABELS_DICTIONARY(wlan_ix) ': ' ...
+        LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_throughput,wlan_ix),:)]);      
+end
+disp(' - Throughput: ')
 disp(throughput_by_policy_comb(ix_throughput,:))
 
-disp([' - Compare with throughput in AM, AM, AM: '])
+disp('    * Compared with throughput in all Always-Max: ')
 disp(throughput_by_policy_comb(1,:))
 
-disp(['MOST FAIR COMBINATION: ' LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_fair,1),:)...
-    ', ' LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_fair,2),:)...
-    ', ' LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_fair,3),:)])
+disp('MOST FAIR COMBINATION: ')
+for wlan_ix = 1:num_wlans
+    disp([LOG_LVL4 LABELS_DICTIONARY(wlan_ix) ': ' ...
+        LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_fair,wlan_ix),:)]);      
+end
 
 disp([' - Fairness: '])
 disp(fairness_by_policy_comb(ix_fair))
 
-disp([' - Compare with fairness in AM, AM, AM: '])
+disp(' - Compare with fairness in in all Always-Max: ')
 disp(fairness_by_policy_comb(1))
 
 disp([LOG_LVL1 'Finished!'])
