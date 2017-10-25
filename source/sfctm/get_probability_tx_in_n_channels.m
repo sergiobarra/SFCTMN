@@ -49,7 +49,6 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
 
             if is_wlan_active
                 
-                % CCA must be accomplished in every transmission channel
                 for ch_ix =  left_ch : right_ch
                     
                     % Power sensed in channel ch

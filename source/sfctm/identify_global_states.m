@@ -23,7 +23,7 @@ function [ PSI_cell, num_global_states, PSI ] = identify_global_states( wlans, n
     
     for wlan_ix = 1 : num_wlans
              
-        max_width = (wlans(wlan_ix).range(2) - wlans(wlan_ix).range(1) + 1);    % Max. channel width WLAN wlan may use       
+        max_width = (wlans(wlan_ix).range(2) - wlans(wlan_ix).range(1) + 1);    % Max. channel width WLAN wlan may use      
         wlans(wlan_ix).states(1,:) = false(1, num_channels_system);             % Instantiate first state as unactive
         acceptable_widths = []; % Set of acceptable widths (determined by the channel access protocol)
         
@@ -140,6 +140,11 @@ function [ PSI_cell, num_global_states, PSI ] = identify_global_states( wlans, n
         for wlan_ix = 1:num_wlans
             PSI(psi_ix,wlan_ix,:) = wlans(wlan_ix).states(PSI_alessandro.states(psi_ix,wlan_ix),:);
             PSI_cell{psi_ix} = squeeze(PSI(psi_ix,:,:));
+            % Sergio on 25 Oct 2017: solve bug regarding channel
+            % representation when just 1 WLAN is considered
+            if num_wlans == 1
+                 PSI_cell{psi_ix} =  PSI_cell{psi_ix}';
+            end
         end
     end
     

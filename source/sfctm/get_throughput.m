@@ -35,7 +35,8 @@ function [ throughput ] = get_throughput( prob_tx_in_num_channels, num_wlans, nu
                             SINGLE_USER_SPATIAL_STREAMS,MCS_INDEX);
             
             throughput(wlan_ix) = throughput(wlan_ix) + (1 - PACKET_ERR_PROBABILITY) * NUM_PACKETS_AGGREGATED *...
-                PACKET_LENGTH * (mu * prob_tx_in_num_channels(wlan_ix, num_ch + 1)) ./ 1E6;
+                PACKET_LENGTH * (mu * prob_tx_in_num_channels(wlan_ix, num_ch + 1)) ./ 1E6;            
+            
         end
     end
 end
