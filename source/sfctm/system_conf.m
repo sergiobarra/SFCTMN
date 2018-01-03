@@ -26,7 +26,7 @@ path_loss_model = PATH_LOSS_FREE_SPACE;             % Path loss model index
 access_protocol_type = ACCESS_PROTOCOL_IEEE80211;   % Access protocol type
 flag_hardcode_distances = true;                     % Allows hardcoding distances from main_sfctmn.m file
 carrier_frequency = 5E9;                          % Carrier frequency [MHz] (2.4 or 5) GHz
-NOISE_DBM = -100;                                   % Ambient noise [dBm]
+NOISE_DBM = -95;                                   % Ambient noise [dBm]
 
 % DSA policy type
 dsa_policy_type = DSA_POLICY_AGGRESSIVE;          % Always-max

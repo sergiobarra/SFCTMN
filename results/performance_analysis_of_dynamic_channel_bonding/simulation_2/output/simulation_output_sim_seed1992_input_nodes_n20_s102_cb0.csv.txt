@@ -1,0 +1,478 @@
+ KOMONDOR SIMULATION 'sim_seed1992_input_nodes_n20_s102_cb0.csv' (seed 1992) Generating nodes...
+------------------------------------
+ Node #0 (AP_A)  - Throughput [Mbps] = 99.59
+  - RTS/CTS sent = 3605 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 3605 - Data packets lost = 363  (10.069348 % lost)
+  - num_tx_init_tried = 3605 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 21.170212 s (84.68 %)
+    · - 2: 0.000000 s (0.00 %)
+    · - 4: 0.000000 s (0.00 %)
+    · - 8: 0.000000 s (0.00 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 21.18 s (84.70 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 3605 (100.00 %)
+    · - 2: 0 (0.00 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #2 (AP_B)  - Throughput [Mbps] = 85.59
+  - RTS/CTS sent = 3077 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 3077 - Data packets lost = 291  (9.457264 % lost)
+  - num_tx_init_tried = 3077 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 18.191620 s (72.77 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 18.20 s (72.79 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 3077 (100.00 %)
+    · - 2: 0 (0.00 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #4 (AP_C)  - Throughput [Mbps] = 60.21
+  - RTS/CTS sent = 2265 - RTS/CTS lost = 93  (4.11 % lost)
+    · RTS lost due to slotted BO = 93 (4.105960 %)
+  - Data packets sent = 2172 - Data packets lost = 212  (9.760589 % lost)
+  - num_tx_init_tried = 11153 - num_tx_init_not_possible = 8888 (79.691563 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.000000 s (0.00 %)
+    · - 2: 6.468048 s (25.87 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 6.47 s (25.89 %)
+    · - 1 = 6.47 s (25.89 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 0 (0.00 %)
+    · - 2: 2265 (100.00 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 8888
+ Node #6 (AP_D)  - Throughput [Mbps] = 19.45
+  - RTS/CTS sent = 787 - RTS/CTS lost = 89  (11.31 % lost)
+    · RTS lost due to slotted BO = 89 (11.308767 %)
+  - Data packets sent = 698 - Data packets lost = 65  (9.312321 % lost)
+  - num_tx_init_tried = 787 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 2.999160 s (12.00 %)
+    · - 2: 0.576432 s (2.31 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.58 s (2.31 %)
+    · - 1 = 3.58 s (14.31 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 532 (67.60 %)
+    · - 2: 255 (32.40 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #8 (AP_E)  - Throughput [Mbps] = 0.00
+  - RTS/CTS sent = 0 - RTS/CTS lost = 0  (-nan % lost)
+    · RTS lost due to slotted BO = 0 (-nan %)
+  - Data packets sent = 0 - Data packets lost = 0  (-nan % lost)
+  - num_tx_init_tried = 1385 - num_tx_init_not_possible = 1385 (100.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.000000 s (0.00 %)
+    · - 2: 0.000000 s (0.00 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 0 (-nan %)
+    · - 2: 0 (-nan %)
+    · - 4: 0 (-nan %)
+    · - 8: 0 (-nan %)
+  - num_tx_init_not_possible = 1385
+ Node #10 (AP_F)  - Throughput [Mbps] = 19.14
+  - RTS/CTS sent = 680 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 680 - Data packets lost = 57  (8.382353 % lost)
+  - num_tx_init_tried = 680 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 4.069436 s (16.28 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 4.07 s (16.28 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 680 (100.00 %)
+    · - 2: 0 (0.00 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #12 (AP_G)  - Throughput [Mbps] = 104.05
+  - RTS/CTS sent = 3959 - RTS/CTS lost = 184  (4.65 % lost)
+    · RTS lost due to slotted BO = 184 (4.647638 %)
+  - Data packets sent = 3775 - Data packets lost = 388  (10.278146 % lost)
+  - num_tx_init_tried = 3959 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.000000 s (0.00 %)
+    · - 2: 10.727748 s (42.91 %)
+    · - 4: 0.245196 s (0.98 %)
+    · - 8: -0.022680 s (-0.09 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 10.96 s (43.83 %)
+    · - 5 = 10.96 s (43.83 %)
+    · - 6 = 0.22 s (0.89 %)
+    · - 7 = 0.22 s (0.89 %)
+    · Number of tx trials per number of channels:
+    · - 1: 0 (0.00 %)
+    · - 2: 3792 (95.78 %)
+    · - 4: 167 (4.22 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #14 (AP_H)  - Throughput [Mbps] = 28.51
+  - RTS/CTS sent = 1094 - RTS/CTS lost = 64  (5.85 % lost)
+    · RTS lost due to slotted BO = 61 (5.575868 %)
+  - Data packets sent = 1030 - Data packets lost = 102  (9.902913 % lost)
+  - num_tx_init_tried = 1094 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.705456 s (2.82 %)
+    · - 2: 0.766396 s (3.07 %)
+    · - 4: 1.188388 s (4.75 %)
+    · - 8: -0.131072 s (-0.52 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 2.53 s (10.12 %)
+    · - 1 = 1.83 s (7.30 %)
+    · - 2 = 1.06 s (4.23 %)
+    · - 3 = 1.06 s (4.23 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 120 (10.97 %)
+    · - 2: 272 (24.86 %)
+    · - 4: 701 (64.08 %)
+    · - 8: 1 (0.09 %)
+  - num_tx_init_not_possible = 0
+ Node #16 (AP_I)  - Throughput [Mbps] = 102.24
+  - RTS/CTS sent = 3730 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 3730 - Data packets lost = 402  (10.777480 % lost)
+  - num_tx_init_tried = 3730 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 21.202872 s (84.81 %)
+    · - 2: 0.198000 s (0.79 %)
+    · - 4: 0.037260 s (0.15 %)
+    · - 8: -0.003240 s (-0.01 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.03 s (0.14 %)
+    · - 5 = 0.03 s (0.14 %)
+    · - 6 = 0.23 s (0.93 %)
+    · - 7 = 21.44 s (85.77 %)
+    · Number of tx trials per number of channels:
+    · - 1: 3640 (97.59 %)
+    · - 2: 67 (1.80 %)
+    · - 4: 23 (0.62 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #18 (AP_J)  - Throughput [Mbps] = 56.89
+  - RTS/CTS sent = 2048 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 2048 - Data packets lost = 196  (9.570312 % lost)
+  - num_tx_init_tried = 2048 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 12.025412 s (48.10 %)
+    · - 2: 0.033000 s (0.13 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.03 s (0.13 %)
+    · - 3 = 12.06 s (48.25 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 2038 (99.51 %)
+    · - 2: 10 (0.49 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #20 (AP_K)  - Throughput [Mbps] = 15.24
+  - RTS/CTS sent = 617 - RTS/CTS lost = 64  (10.37 % lost)
+    · RTS lost due to slotted BO = 60 (9.724473 %)
+  - Data packets sent = 553 - Data packets lost = 57  (10.307414 % lost)
+  - num_tx_init_tried = 617 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 3.242176 s (12.97 %)
+    · - 2: 0.000000 s (0.00 %)
+    · - 4: 0.000000 s (0.00 %)
+    · - 8: 0.000000 s (0.00 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 3.24 s (12.97 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 617 (100.00 %)
+    · - 2: 0 (0.00 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #22 (AP_L)  - Throughput [Mbps] = 17.45
+  - RTS/CTS sent = 806 - RTS/CTS lost = 180  (22.33 % lost)
+    · RTS lost due to slotted BO = 174 (21.588089 %)
+  - Data packets sent = 626 - Data packets lost = 58  (9.265176 % lost)
+  - num_tx_init_tried = 806 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 3.716656 s (14.87 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 3.72 s (14.87 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 806 (100.00 %)
+    · - 2: 0 (0.00 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #24 (AP_M)  - Throughput [Mbps] = 45.71
+  - RTS/CTS sent = 1674 - RTS/CTS lost = 25  (1.49 % lost)
+    · RTS lost due to slotted BO = 25 (1.493429 %)
+  - Data packets sent = 1649 - Data packets lost = 161  (9.763493 % lost)
+  - num_tx_init_tried = 1674 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 9.720516 s (38.88 %)
+    · - 2: 0.000000 s (0.00 %)
+    · - 4: 0.000000 s (0.00 %)
+    · - 8: 0.000000 s (0.00 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 9.72 s (38.89 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 1674 (100.00 %)
+    · - 2: 0 (0.00 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #26 (AP_N)  - Throughput [Mbps] = 36.71
+  - RTS/CTS sent = 1381 - RTS/CTS lost = 45  (3.26 % lost)
+    · RTS lost due to slotted BO = 45 (3.258508 %)
+  - Data packets sent = 1336 - Data packets lost = 141  (10.553892 % lost)
+  - num_tx_init_tried = 1381 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 7.807360 s (31.23 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 7.81 s (31.24 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 1381 (100.00 %)
+    · - 2: 0 (0.00 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #28 (AP_O)  - Throughput [Mbps] = 0.00
+  - RTS/CTS sent = 0 - RTS/CTS lost = 0  (-nan % lost)
+    · RTS lost due to slotted BO = 0 (-nan %)
+  - Data packets sent = 0 - Data packets lost = 0  (-nan % lost)
+  - num_tx_init_tried = 477 - num_tx_init_not_possible = 477 (100.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.000000 s (0.00 %)
+    · - 2: 0.000000 s (0.00 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 0 (-nan %)
+    · - 2: 0 (-nan %)
+    · - 4: 0 (-nan %)
+    · - 8: 0 (-nan %)
+  - num_tx_init_not_possible = 477
+ Node #30 (AP_P)  - Throughput [Mbps] = 27.46
+  - RTS/CTS sent = 1027 - RTS/CTS lost = 40  (3.89 % lost)
+    · RTS lost due to slotted BO = 40 (3.894839 %)
+  - Data packets sent = 987 - Data packets lost = 93  (9.422492 % lost)
+  - num_tx_init_tried = 1027 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 4.350924 s (17.40 %)
+    · - 2: 0.647376 s (2.59 %)
+    · - 4: 0.066704 s (0.27 %)
+    · - 8: -0.008980 s (-0.04 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 5.06 s (20.23 %)
+    · - 1 = 0.71 s (2.82 %)
+    · - 2 = 0.06 s (0.23 %)
+    · - 3 = 0.06 s (0.23 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 748 (72.83 %)
+    · - 2: 235 (22.88 %)
+    · - 4: 44 (4.28 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #32 (AP_Q)  - Throughput [Mbps] = 74.80
+  - RTS/CTS sent = 2725 - RTS/CTS lost = 25  (0.92 % lost)
+    · RTS lost due to slotted BO = 25 (0.917431 %)
+  - Data packets sent = 2700 - Data packets lost = 265  (9.814815 % lost)
+  - num_tx_init_tried = 16117 - num_tx_init_not_possible = 13392 (83.092387 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.000000 s (0.00 %)
+    · - 2: 0.000000 s (0.00 %)
+    · - 4: 4.373280 s (17.49 %)
+    · - 8: -0.429300 s (-1.72 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 3.95 s (15.79 %)
+    · - 1 = 3.95 s (15.79 %)
+    · - 2 = 3.95 s (15.79 %)
+    · - 3 = 3.95 s (15.79 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 0 (0.00 %)
+    · - 2: 0 (0.00 %)
+    · - 4: 2725 (100.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 13392
+ Node #34 (AP_R)  - Throughput [Mbps] = 77.81
+  - RTS/CTS sent = 2861 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 2861 - Data packets lost = 328  (11.464523 % lost)
+  - num_tx_init_tried = 2861 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 8.249916 s (33.00 %)
+    · - 2: 4.184400 s (16.74 %)
+    · - 4: 0.000000 s (0.00 %)
+    · - 8: 0.000852 s (0.00 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 12.44 s (49.76 %)
+    · - 1 = 4.19 s (16.75 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 1434 (50.12 %)
+    · - 2: 1426 (49.84 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 1 (0.03 %)
+  - num_tx_init_not_possible = 0
+ Node #36 (AP_S)  - Throughput [Mbps] = 42.79
+  - RTS/CTS sent = 1726 - RTS/CTS lost = 176  (10.20 % lost)
+    · RTS lost due to slotted BO = 176 (10.196987 %)
+  - Data packets sent = 1550 - Data packets lost = 157  (10.129032 % lost)
+  - num_tx_init_tried = 1726 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.000000 s (0.00 %)
+    · - 2: 4.362048 s (17.45 %)
+    · - 4: 0.138580 s (0.55 %)
+    · - 8: -0.007184 s (-0.03 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 4.50 s (17.98 %)
+    · - 5 = 4.50 s (17.98 %)
+    · - 6 = 0.13 s (0.53 %)
+    · - 7 = 0.13 s (0.53 %)
+    · Number of tx trials per number of channels:
+    · - 1: 0 (0.00 %)
+    · - 2: 1641 (95.08 %)
+    · - 4: 85 (4.92 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #38 (AP_T)  - Throughput [Mbps] = 56.71
+  - RTS/CTS sent = 2057 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 2057 - Data packets lost = 211  (10.257657 % lost)
+  - num_tx_init_tried = 2057 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.000000 s (0.00 %)
+    · - 2: 6.091800 s (24.37 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 6.10 s (24.38 %)
+    · - 5 = 6.10 s (24.38 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 0 (0.00 %)
+    · - 2: 2057 (100.00 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0

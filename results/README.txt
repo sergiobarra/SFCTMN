@@ -1,0 +1,3 @@
+This folder contains results from different experiments
+- \march14analysis contains some preliminary analysis on DCB policies in overlapping and no overlapping scenarios
+- \performance_analysis_of_dynamic_channel_bonding contains results from the paper [S. Barrachina-Muñoz, Francesc Wilhelmi and B. Bellalta. Performance Analysis of Dynamic Channel Bonding in Spatially Distributed High Density WLANs. arXiv prepint arXiv:1801.00594 (2018)](https://arxiv.org/abs/1801.00594)

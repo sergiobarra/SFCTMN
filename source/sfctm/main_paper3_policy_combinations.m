@@ -28,7 +28,7 @@ flag_display_wlans = false;         % Flag for displaying WLANs' input info
 flag_display_Power_PSI = false;         % Flag for displaying sensed powers
 flag_display_Q_logical = false;     % Flag for displaying logical transition rate matrix
 flag_display_Q = false;              % Flag for displaying transition rate matrix
-flag_display_throughput = false;     % Flag for displaying the throughput
+flag_display_throughput = true;     % Flag for displaying the throughput
 
 % - Plots
 flag_plot_PSI_ctmc = false;          % Flag for plotting PSI's CTMC
@@ -79,7 +79,7 @@ filename = '../../input/wlans_input.csv';   % Path to WLAN input file
 if flag_hardcode_distances
     disp([LOG_LVL3 'HARDCODING DISTANCES FOR CONVENIENCE!'])
     distance_ap_sta = 1;
-    distance_ap_ap = 20;
+    distance_ap_ap = 200;
     for w = 1 : num_wlans
         wlans(w).position_ap = [((w - 1) * distance_ap_ap) 0 0];
         wlans(w).position_sta = wlans(w).position_ap + [0 -distance_ap_sta 0];
@@ -142,7 +142,13 @@ switch num_wlans
         dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:));
         
     case 3
-        dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:), policies_by_wlan(3,:));
+        % dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:), policies_by_wlan(3,:));
+        % dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_AGGRESSIVE, DSA_POLICY_AGGRESSIVE];
+        % dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_AGGRESSIVE];
+        dsa_policy_matrix = [DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM];
+        % dsa_policy_matrix = [DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_EXPLORER_UNIFORM];
+        % dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM];
+        % dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_EXPLORER_UNIFORM];
         
     case 4
         dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:), policies_by_wlan(3,:), policies_by_wlan(4,:));
@@ -151,8 +157,6 @@ switch num_wlans
         dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:), policies_by_wlan(3,:), policies_by_wlan(4,:), policies_by_wlan(5,:));
         
 end
-
-
 
 throughput_by_policy_comb = zeros(size(dsa_policy_matrix,1),size(dsa_policy_matrix,2));
 total_throughput_by_policy_comb = zeros(size(dsa_policy_matrix,1),1);
@@ -197,6 +201,8 @@ for comb_ix = 1:size(dsa_policy_matrix,1)
     proportional_fairness = sum(log(throughput));
     
     fairness_by_policy_comb(comb_ix) = proportional_fairness;
+    
+    jains_fairness(comb_ix) = ((sum(throughput))^2) / (3 * sum(throughput.^2));
     
     
     %% Display info and plot
@@ -267,38 +273,44 @@ for comb_ix = 1:size(dsa_policy_matrix,1)
         for w = 1 : num_wlans
             disp([LOG_LVL4 LABELS_DICTIONARY(w) ': ' num2str(throughput(w))]);
         end
+        disp(throughput)
         disp([LOG_LVL3 'Total: ' num2str(sum(throughput))]);
         disp([LOG_LVL3 'Proportional fairness: ' num2str(proportional_fairness)]);
+        disp([LOG_LVL3 'Jains fairness index: ' num2str(jains_fairness)]);
     end
     
 end
 
-[max_through, ix_throughput] = max(total_throughput_by_policy_comb);
-
-[max_fair, ix_fair] = max(fairness_by_policy_comb);
-
-
-disp('MOST THROUGHPUT COMBINATION: ')
-for wlan_ix = 1:num_wlans
-    disp([LOG_LVL4 LABELS_DICTIONARY(wlan_ix) ': ' ...
-        LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_throughput,wlan_ix),:)]);      
-end
-disp(' - Throughput: ')
-disp(throughput_by_policy_comb(ix_throughput,:))
-
-disp('    * Compared with throughput in all Always-Max: ')
-disp(throughput_by_policy_comb(1,:))
-
-disp('MOST FAIR COMBINATION: ')
-for wlan_ix = 1:num_wlans
-    disp([LOG_LVL4 LABELS_DICTIONARY(wlan_ix) ': ' ...
-        LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_fair,wlan_ix),:)]);      
-end
-
-disp([' - Fairness: '])
-disp(fairness_by_policy_comb(ix_fair))
-
-disp(' - Compare with fairness in in all Always-Max: ')
-disp(fairness_by_policy_comb(1))
+%% FIND OPTIMAL POLICY 
+% 
+% [max_through, ix_throughput] = max(total_throughput_by_policy_comb);
+% 
+% [max_fair, ix_fair] = max(fairness_by_policy_comb);
+% 
+% 
+% disp('MOST THROUGHPUT COMBINATION: ')
+% for wlan_ix = 1:num_wlans
+%     disp([LOG_LVL4 LABELS_DICTIONARY(wlan_ix) ': ' ...
+%         LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_throughput,wlan_ix),:)]);      
+% end
+% disp(' - Throughput: ')
+% disp(throughput_by_policy_comb(ix_throughput,:))
+% 
+% disp('    * Compared with throughput in all Always-Max: ')
+% disp(throughput_by_policy_comb(1,:))
+% 
+% disp('MOST FAIR COMBINATION: ')
+% for wlan_ix = 1:num_wlans
+%     disp([LOG_LVL4 LABELS_DICTIONARY(wlan_ix) ': ' ...
+%         LABELS_DICTIONARY_DSA_POLICY(dsa_policy_matrix(ix_fair,wlan_ix),:)]);      
+% end
+% 
+% disp([' - Fairness: '])
+% disp(fairness_by_policy_comb(ix_fair))
+% 
+% disp([LOG_LVL3 'Jains fairness index: ' num2str(jains_fairness)]);
+% 
+% disp(' - Compare with fairness in in all Always-Max: ')
+% disp(fairness_by_policy_comb(1))
 
 disp([LOG_LVL1 'Finished!'])

@@ -1,0 +1,50 @@
+ KOMONDOR SIMULATION 'sim_seed1992_input_nodes_n2_s42_cb6.csv' (seed 1992) Generating nodes...
+------------------------------------
+ Node #0 (AP_A)  - Throughput [Mbps] = 133.75
+  - RTS/CTS sent = 3871 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 3871 - Data packets lost = 388  (10.023250 % lost)
+  - num_tx_init_tried = 3871 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 11.352616 s (56.76 %)
+    · - 2: 5.755200 s (28.78 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 17.11 s (85.57 %)
+    · - 3 = 5.76 s (28.79 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 1927 (49.78 %)
+    · - 2: 1944 (50.22 %)
+    · - 4: 0 (0.00 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0
+ Node #2 (AP_B)  - Throughput [Mbps] = 170.38
+  - RTS/CTS sent = 4961 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 4961 - Data packets lost = 524  (10.562387 % lost)
+  - num_tx_init_tried = 4961 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 9.432208 s (47.16 %)
+    · - 2: 4.785000 s (23.93 %)
+    · - 4: 2.765340 s (13.83 %)
+    · - 8: -0.267300 s (-1.34 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 7.29 s (36.44 %)
+    · - 1 = 16.72 s (83.62 %)
+    · - 2 = 2.50 s (12.50 %)
+    · - 3 = 2.50 s (12.50 %)
+    · - 4 = 0.00 s (0.00 %)
+    · - 5 = 0.00 s (0.00 %)
+    · - 6 = 0.00 s (0.00 %)
+    · - 7 = 0.00 s (0.00 %)
+    · Number of tx trials per number of channels:
+    · - 1: 1617 (32.59 %)
+    · - 2: 1636 (32.98 %)
+    · - 4: 1708 (34.43 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0

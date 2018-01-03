@@ -1,0 +1,52 @@
+ KOMONDOR SIMULATION 'sim_seed1992_input_nodes_n2_s39_cb6.csv' (seed 1992) Generating nodes...
+------------------------------------
+ Node #0 (AP_A)  - Throughput [Mbps] = 205.90
+  - RTS/CTS sent = 5961 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 5961 - Data packets lost = 599  (10.048650 % lost)
+  - num_tx_init_tried = 5961 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 8.628772 s (43.14 %)
+    · - 2: 4.468200 s (22.34 %)
+    · - 4: 2.467260 s (12.34 %)
+    · - 8: 1.106292 s (5.53 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 1.22 s (6.12 %)
+    · - 1 = 1.22 s (6.12 %)
+    · - 2 = 1.22 s (6.12 %)
+    · - 3 = 1.22 s (6.12 %)
+    · - 4 = 7.92 s (39.62 %)
+    · - 5 = 16.56 s (82.78 %)
+    · - 6 = 3.45 s (17.27 %)
+    · - 7 = 3.45 s (17.27 %)
+    · Number of tx trials per number of channels:
+    · - 1: 1478 (24.79 %)
+    · - 2: 1514 (25.40 %)
+    · - 4: 1523 (25.55 %)
+    · - 8: 1446 (24.26 %)
+  - num_tx_init_not_possible = 0
+ Node #2 (AP_B)  - Throughput [Mbps] = 170.61
+  - RTS/CTS sent = 4931 - RTS/CTS lost = 0  (0.00 % lost)
+    · RTS lost due to slotted BO = 0 (0.000000 %)
+  - Data packets sent = 4931 - Data packets lost = 488  (9.896573 % lost)
+  - num_tx_init_tried = 4931 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 9.771872 s (48.86 %)
+    · - 2: 4.600200 s (23.00 %)
+    · - 4: 2.775060 s (13.88 %)
+    · - 8: -0.260820 s (-1.30 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 0.00 s (0.00 %)
+    · - 3 = 0.00 s (0.00 %)
+    · - 4 = 7.12 s (35.60 %)
+    · - 5 = 16.89 s (84.47 %)
+    · - 6 = 2.52 s (12.58 %)
+    · - 7 = 2.52 s (12.58 %)
+    · Number of tx trials per number of channels:
+    · - 1: 1655 (33.56 %)
+    · - 2: 1563 (31.70 %)
+    · - 4: 1713 (34.74 %)
+    · - 8: 0 (0.00 %)
+  - num_tx_init_not_possible = 0

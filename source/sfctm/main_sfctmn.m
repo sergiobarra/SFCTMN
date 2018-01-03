@@ -27,7 +27,7 @@ flag_display_S_states = false;       % Flag for displaying S' CTMC states
 flag_display_wlans = false;         % Flag for displaying WLANs' input info
 flag_display_Power_PSI = false;         % Flag for displaying sensed powers
 flag_display_Q_logical = false;     % Flag for displaying logical transition rate matrix 
-flag_display_Q = false;              % Flag for displaying transition rate matrix
+flag_display_Q = true;              % Flag for displaying transition rate matrix
 flag_display_throughput = true;     % Flag for displaying the throughput
 
 % - Plots
@@ -38,7 +38,7 @@ flag_plot_ch_allocation = true;    % Flag for plotting WLANs' channel allocation
 flag_plot_throughput = false;        % Flag for plotting the throughput
 
 % - Logs
-flag_logs_feasible_space = true;   % Flag for displaying logs of feasible space construction algorithm
+flag_logs_feasible_space = false;   % Flag for displaying logs of feasible space construction algorithm
 
 if flag_save_console_logs
     diary('console_logs.txt') % Save logs in a text file
@@ -79,7 +79,7 @@ filename = '../../input/wlans_input.csv';   % Path to WLAN input file
 if flag_hardcode_distances
     disp([LOG_LVL3 'HARDCODING DISTANCES FOR CONVENIENCE!'])
     distance_ap_sta = 1;
-    distance_ap_ap = 2;
+    distance_ap_ap = 450;
     for w = 1 : num_wlans
         wlans(w).position_ap = [((w - 1) * distance_ap_ap) 0 0];
         wlans(w).position_sta = wlans(w).position_ap + [0 -distance_ap_sta 0];

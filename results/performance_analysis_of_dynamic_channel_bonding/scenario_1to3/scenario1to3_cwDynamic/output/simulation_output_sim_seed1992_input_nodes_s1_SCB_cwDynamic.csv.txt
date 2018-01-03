@@ -1,0 +1,40 @@
+ KOMONDOR SIMULATION 'sim_seed1992_input_nodes_s1_SCB_cwDynamic.csv' (seed 1992) Generating nodes...
+------------------------------------
+ Node #0 (AP_A)  - Throughput [Mbps] = 130.27
+  - RTS/CTS sent = 181822 - RTS/CTS lost = 12201  (6.71 % lost)
+    · RTS lost due to slotted BO = 12201 (6.710409 %)
+  - Data packets sent = 169621 - Data packets lost = 0  (0.000000 % lost)
+  - num_tx_init_tried = 573216 - num_tx_init_not_possible = 391394 (68.280369 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.000000 s (0.00 %)
+    · - 2: 0.000000 s (0.00 %)
+    · - 4: 275.223636 s (27.52 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 275.22 s (27.52 %)
+    · - 1 = 275.22 s (27.52 %)
+    · - 2 = 275.22 s (27.52 %)
+    · - 3 = 275.22 s (27.52 %)
+    · Number of tx trials per number of channels:
+  - num_tx_init_not_possible = 391394
+ Node #2 (AP_B)  - Throughput [Mbps] = 149.53
+  - RTS/CTS sent = 206905 - RTS/CTS lost = 12201  (5.90 % lost)
+    · RTS lost due to slotted BO = 12201 (5.896909 %)
+  - Data packets sent = 194704 - Data packets lost = 0  (0.000000 % lost)
+  - num_tx_init_tried = 206905 - num_tx_init_not_possible = 0 (0.000000 % failed)
+    ·  Time EFFECTIVELY transmitting in N channels:
+    · - 1: 0.000000 s (0.00 %)
+    · - 2: 642.962436 s (64.30 %)
+    · Time EFFECTIVELY transmitting in each channel:
+    · - 0 = 0.00 s (0.00 %)
+    · - 1 = 0.00 s (0.00 %)
+    · - 2 = 642.96 s (64.30 %)
+    · - 3 = 642.96 s (64.30 %)
+    · Number of tx trials per number of channels:
+  - num_tx_init_not_possible = 0
+- Average throughput per WLAN = 139.90 Mbps
+- Fairness = 16.29
+- Average number of data packets successfully sent per WLAN = 182162.50
+- Average number of RTS packets lost due to slotted BO = 12201.00 (6.28 % loss)
+- Prob. collision by slotted BO = 0.063037
+- Aggregate throughput = 279.801600 Mbps
+- Aggregate number of transmission not possible = 391394
