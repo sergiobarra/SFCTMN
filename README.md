@@ -1,4 +1,6 @@
-<img src="https://github.com/sergiobarra/SFCTMN/blob/master/sfctmn_logo.png" width="300" height="100">
+<p align="center">
+  <img src="https://github.com/sergiobarra/SFCTMN/blob/master/sfctmn_logo.png" width="340" height="100">
+</p>
 
 # Spatial Flexible Continuous Time Markov Network (SFCTMN)
 
@@ -15,10 +17,14 @@ Just [Matlab](https://www.mathworks.com/) is required.
  * Run main file ```main_sfctmn.m``` to display the analysis results.
  * (*) New DCB policies may be defined in file ```apply_dsa_policy.m```.
  
-<img src="https://github.com/sergiobarra/SFCTMN/blob/master/documentation/General%20flowchart.png" width="750" height="380">
+ <p align="center">
+<img src="https://github.com/sergiobarra/SFCTMN/blob/master/documentation/General%20flowchart.png" width="700" height="300">
+</p>
 
  * See an example scenario below
-<img src="https://github.com/sergiobarra/SFCTMN/blob/master/documentation/sfctmn_ctmn_example.png" width="400" height="350">
+ <p align="center">
+<img src="https://github.com/sergiobarra/SFCTMN/blob/master/documentation/sfctmn_ctmn_example.png" width="380" height="300">
+</p>
 
 ### Support
 You can contact me for any issue you may have when using the SFCTMN framework.
