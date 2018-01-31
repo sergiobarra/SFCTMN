@@ -27,10 +27,14 @@ Just [Matlab](https://www.mathworks.com/) is required.
 </p>
 
 ### Support
-You can contact me for any issue you may have when using the SFCTMN framework.
+
+You can contact me for any issue you may have when using the SFCTMN framework at sergio.barrachina@upf.edu
 
 ### Contributing
-I am always open to new contributions. Just drop me an email at sergio.barrachina@upf.edu
 
+We are always open to new contributions. Just drop me an email at sergio.barrachina@upf.edu
 
+### Acknowledgements
+
+This work has been partially supported by a Gift from the Cisco University Research Program (CG\#890107, Towards Deterministic Channel Access in High-Density WLANs) Fund, a corporate advised fund of Silicon Valley Community Foundation.
 
