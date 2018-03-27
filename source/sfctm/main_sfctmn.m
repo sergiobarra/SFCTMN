@@ -13,7 +13,7 @@ close all
 clc
 
 % Display framework header
-type '..\..\sfctmn_header.txt'
+type 'sfctmn_header.txt'
 
 %% FRAMEWORK CONFIGURATION
 % Framework configuration. Booleans for activating specific functionalities
@@ -68,7 +68,7 @@ disp([LOG_LVL3 'System configuration loaded!'])
 
 % Get WLANs info from input CSV file
 disp([LOG_LVL2 'Processing WLAN input...'])
-filename = '../../input/wlans_input.csv';   % Path to WLAN input file
+filename = './input/wlans_input2.csv';   % Path to WLAN input file
 [wlans, num_channels_system, num_wlans] = generate_wlans(filename);
 
 % HARDCODING distance for convenience
@@ -84,8 +84,10 @@ if flag_hardcode_distances
         wlans(w).position_ap = [((w - 1) * distance_ap_ap) 0 0];
         wlans(w).position_sta = wlans(w).position_ap + [0 -distance_ap_sta 0];
     end
+    % END OF HARDCODING distance for convenience
+else
+    [distance_ap_ap, distance_ap_sta] = compute_distance_nodes(wlans);
 end
-% END OF HARDCODING distance for convenience
 
 % Check input correctness
 disp([LOG_LVL3 'Checking input configuration...'])
@@ -95,6 +97,8 @@ disp([LOG_LVL4 'WLANs input file processed successfully!'])
 % Display WLANs information
 interest_power = compute_power_received(distance_ap_sta, POWER_TX_DEFAULT, GAIN_TX_DEFAULT,...
     GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);
+
+mcs_indexes = compute_MCS(interest_power, num_channels_system);
 
 sinr_isolation = compute_sinr(interest_power, 0, NOISE_DBM);    % SINR sensed in the STA in isolation (just considering ambient noise)
 
@@ -122,8 +126,10 @@ disp([LOG_LVL2 'Global states identified! There are ' num2str(num_global_states)
 % Compute the power perceived by each WLAN in every channel in every global state [dBm]
 disp(' ')
 disp([LOG_LVL1 'Computing interference sensed power by the STAs in every state (Power_PSI). It may take some minutes :) ...'])
-Power_PSI_cell = compute_sensed_power(wlans, num_global_states, num_channels_system, PSI_cell, path_loss_model,...
-    carrier_frequency);
+%Power_PSI_cell = compute_sensed_power(wlans, num_global_states, num_channels_system, PSI_cell, path_loss_model,...
+%    carrier_frequency);
+[ Power_AP_PSI_cell Power_STA_PSI_cell SINR_cell] = compute_sensed_power(wlans, num_global_states, PSI_cell, path_loss_model,...
+        carrier_frequency, 0, interest_power, distance_ap_ap, distance_ap_sta, num_channels_system);
 disp([LOG_LVL2 'Sensed power computed!'])
 
 %% FEASIBLE STATES SPACE (S)
@@ -132,8 +138,8 @@ disp([LOG_LVL2 'Sensed power computed!'])
 disp(' ')
 disp([LOG_LVL1 'Identifying feasible state space (S) and transition rate matrix (Q)...'])
 
-[ Q, S, S_cell, Q_logical_S, Q_logical_PSI, S_num_states ] = identify_feasible_states_and_Q(PSI_cell, Power_PSI_cell,...
-    num_channels_system, wlans, dsa_policy_type, flag_logs_feasible_space);
+[ Q, S, S_cell, Q_logical_S, Q_logical_PSI, S_num_states ] = identify_feasible_states_and_Q(PSI_cell, Power_AP_PSI_cell,...
+    num_channels_system, wlans, dsa_policy_type, mcs_indexes, flag_logs_feasible_space);
 
 disp([LOG_LVL2 'Feasible state space (S) identified! There are ' num2str(S_num_states) ' feasible states.'])
 
@@ -152,7 +158,7 @@ disp([LOG_LVL2 'Equilibrium distribution found! Prob. of being in each possible 
 disp(p_equilibrium)
 disp([LOG_LVL2 'Reversible Markov chain? ' num2str(Q_is_reversible) ' (error: ' num2str(error_reversible) ')'])
 
-[prob_tx_num_channels_success, prob_tx_num_channels_unsuccess] = get_probability_tx_in_n_channels(Power_PSI_cell,...
+[prob_tx_num_channels_success, prob_tx_num_channels_unsuccess] = get_probability_tx_in_n_channels(Power_STA_PSI_cell,...
     S_cell, PSI_cell, num_wlans, num_channels_system, p_equilibrium, path_loss_model, distance_ap_sta, wlans,...
     carrier_frequency);
 
@@ -168,7 +174,8 @@ disp(' ')
 disp([LOG_LVL1 'Computing throughput...'])
 
 % get_throughput now per states
-throughput = get_throughput(prob_tx_num_channels_success, num_wlans, num_channels_system);
+%throughput = get_throughput(prob_tx_num_channels_success, num_wlans, num_channels_system, mcs_indexes);
+throughput = get_throughput(wlans, num_wlans, p_equilibrium, S_cell, PSI_cell, SINR_cell, mcs_indexes, interest_power);
 
 proportional_fairness = sum(log(throughput));
 disp([LOG_LVL2 'Trhoughput computed!'])

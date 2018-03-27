@@ -23,8 +23,7 @@ function sinr = compute_sinr(interest_power, interference_power, noise_power)
 
     sinr_linear = interest_power_mw / (interference_power_mw + noise_power_mw);
 
-    sinr = 10 * log10(sinr_linear);
-    
+    sinr = 10 * log10(sinr_linear);    
     
 end
 

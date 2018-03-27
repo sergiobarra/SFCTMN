@@ -64,6 +64,12 @@ function [ power_rx ] = compute_power_received(distance, power_tx, G_tx, G_rx, f
             else 
                 loss = LFS;
             end
+            
+        case PATH_LOSS_WMN_SEMINAR
+            
+            PL0 = 30;
+            gamma = 4.4;
+            loss = PL0 + 10*gamma*log10(distance);
                                                
         otherwise
              error('Unknwown path loss model!')

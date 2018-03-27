@@ -40,7 +40,7 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
 
         for wlan_ix = 1 : num_wlans
             
-%             disp(['  · wlan: ' num2str(wlan_ix)])
+%             disp(['  ï¿½ wlan: ' num2str(wlan_ix)])
             
             % Number of channels used by WLAN wlan in state s
             [left_ch, right_ch, is_wlan_active ,num_channels] = get_channel_range(S_cell{s_ix}(wlan_ix,:));
@@ -55,8 +55,8 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
                     
                     [ ~, psi_s_ix ] = find_state_in_set( S_cell{s_ix}, PSI_cell );
                     
-                    interest_power = compute_power_received(distance_ap_sta, wlans(wlan_ix).tx_power, GAIN_TX_DEFAULT,...
-                        GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);
+                    interest_power = compute_power_received(distance_ap_sta(wlan_ix, wlan_ix), ...
+                        wlans(wlan_ix).tx_power, GAIN_TX_DEFAULT, GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);
                    
                     interference_power = Power_PSI_cell{psi_s_ix}(wlan_ix,ch_ix);
                     
@@ -68,11 +68,11 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
                 end
 
                 if capture_effect_accomplished
-                    prob_tx_in_num_channels_success(wlan_ix, num_channels + 1) = prob_tx_in_num_channels_success(wlan_ix, num_channels + 1)...
-                    + pi_s;
+                    prob_tx_in_num_channels_success(wlan_ix, num_channels + 1) = ...
+                        prob_tx_in_num_channels_success(wlan_ix, num_channels + 1) + pi_s;
                 else
-                    prob_tx_in_num_channels_unsuccess(wlan_ix, num_channels + 1) = prob_tx_in_num_channels_unsuccess(wlan_ix, num_channels + 1)...
-                    + pi_s;
+                    prob_tx_in_num_channels_unsuccess(wlan_ix, num_channels + 1) = ...
+                        prob_tx_in_num_channels_unsuccess(wlan_ix, num_channels + 1) + pi_s;
                 end
             end            
         end

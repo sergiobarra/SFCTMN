@@ -32,7 +32,7 @@ INPUT_FIELD_POS_STA_Y = 12;                     % Index of pos Y in the input fi
 INPUT_FIELD_POS_STA_Z = 13;                     % Index of pos Z in the input file
 
 % Labels
-LABELS_DICTIONARY_PATH_LOSS = ['Free Space ';'Urban Macro';'Urban Pico ';'In-door sh.';'8011ax Res.'];
+LABELS_DICTIONARY_PATH_LOSS = ['Free Space ';'Urban Macro';'Urban Pico ';'In-door sh.';'8011ax Res.';'8011ax Res.'];
 LABELS_DICTIONARY_ACCESS_PROTOCOL = ['Log2maps';'Adjacent';'IE802.11'];
 LABELS_DICTIONARY_DSA_POLICY = ['Aggressive';'OnlyMax   ';'ExplorerUn';'ExplorerLa'; 'OnlyPrim  '];
 
@@ -70,6 +70,23 @@ PATH_LOSS_URBAN_MACRO = 2;                      % Urban macro deployment  (http:
 PATH_LOSS_URBAN_MICRO = 3;                      % Pico/hotzone deployment
 PATH_LOSS_INDOOR_SHADOWING = 4;                 % WLAN indorr path loss model
 PATH_LOSS_AX_RESIDENTIAL = 5;                   % % Retrieved from: https://mentor.ieee.org/802.11/dcn/14/11-14-0882-04-00ax-tgax-channel-model-document.docx
+PATH_LOSS_WMN_SEMINAR = 6;
+
+% MCS indexes
+MODULATION_FORBIDDEN = -1;
+MODULATION_NONE = 0;
+MODULATION_BPSK_1_2 = 1;
+MODULATION_QPSK_1_2 = 2;
+MODULATION_QPSK_3_4 = 3;
+MODULATION_16QAM_1_2 = 4;
+MODULATION_16QAM_3_4 = 5;
+MODULATION_64QAM_2_3 = 6;
+MODULATION_64QAM_3_4 = 7;
+MODULATION_64QAM_5_6 = 8;
+MODULATION_256QAM_3_4 = 9;
+MODULATION_256QAM_5_6 = 10;
+MODULATION_1024QAM_3_4 = 11;
+MODULATION_1024QAM_5_6 = 12;
 
 % PHY constants
 LIGHT_SPEED = 3E8;                              % Speed of light [m/s]

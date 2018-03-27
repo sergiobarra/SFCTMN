@@ -129,11 +129,11 @@ function [ PSI_cell, num_global_states, PSI ] = identify_global_states( wlans, n
                 error('Protocol type unknown!');
         end
     end
-
+    
     % Use Alessandro's function for generating global states starting from WLAN own global states
     PSI_alessandro = create_global_states(wlans);   
     num_global_states = size(PSI_alessandro.states,1);
-    
+   
     PSI = zeros(size(PSI_alessandro.states,1), num_wlans, num_channels_system);
     PSI_cell =  {}; % PSI in cell format (easier to handle in Matlab code)
     for psi_ix = 1 : num_global_states

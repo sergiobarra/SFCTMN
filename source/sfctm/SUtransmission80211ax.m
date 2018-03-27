@@ -19,9 +19,9 @@ function [T,T_c]=SUtransmission80211ax(L,Na,W,SUSS,MCSindex)
   
   %% PHY
   [Nsc,Ym,Yc,T_OFDM,Legacy_PHYH,HE_PHYH] = PHYParams80211ax(W,MCSindex,SUSS);
-  
+ 
   Rate = Nsc * Ym * Yc * SUSS;
-  Rate_20MHz = 52 * Ym * Yc; % In legacy mode
+  Rate_20MHz = 52 * Ym * Yc;    % In legacy mode
     
   % Duplicate RTS/CTS for bandwidth allocation
   T_RTS  = Legacy_PHYH + ceil((L_SF+L_RTS+L_TAIL)/Rate_20MHz)*T_OFDM;
