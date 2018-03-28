@@ -50,20 +50,19 @@ function [ power_rx ] = compute_power_received(distance, power_tx, G_tx, G_rx, f
         % with extra indoor wall and floor penetration loss.
         case PATH_LOSS_AX_RESIDENTIAL
             
-             n_walls = 10;  % Wall frequency
-             n_floors = 3;  % Floor frequency
-             L_iw = 5;      % Penetration for a single wall (dB)
-             f_mhz = f * 1E-6;
-             d_km = distance * 1E-3;
-             LFS = 32.4 + 20 * log10(f_mhz) + 20 * log10(d_km);
-             d_BP = 5;      % Break-point distance (m)
+            n_walls = 10;                % Wall frequency
+            n_floors = 3;                % Floor frequency
+            d_BP = 5;                    % Break-point distance (m)
 
             if distance >= d_BP
-                loss = LFS + 35*log10(distance/d_BP) + 18.3 * n_floors^(((n_floors+2)/(n_floors+1)) - 0.46) + L_iw * n_walls;
-                
+               breakpoint_loss = 35*log10(distance/5);
             else 
-                loss = LFS;
+               breakpoint_loss = 0;
             end
+
+            loss = 40.05 + 20*log10(f/2.4) + 20 * log10(min(distance,5)) + ...
+                   breakpoint_loss + 18.3*(distance/n_floors)^(((distance/n_floors)+2)/...
+                   ((distance/n_floors)+1) - 0.46) + 5*(distance/n_walls);       
             
         case PATH_LOSS_WMN_SEMINAR
             
