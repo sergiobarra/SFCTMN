@@ -121,18 +121,8 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_a
                         % Departure rate of WLAN wlan in current state s
                         % - Sergio on 5 Oct 2017, replace hardcoded mu by 802.11ax computation
                         % - mu_s = MU(num_ch_wlan_s);
-                        %mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, num_ch_wlan_s * 20,...
-                        %    SINGLE_USER_SPATIAL_STREAMS, mcs_indexes(wlan_ix, log2(num_ch_wlan_s)+1));
-                        
-                        if wlan_ix == 1
-                            mu_s = 787.0679;
-                        elseif wlan_ix == 2
-                            mu_s = 1138.6529;
-                        elseif wlan_ix == 3
-                            mu_s = 1128.7662;
-                        elseif wlan_ix == 4
-                            mu_s = 961.7519;
-                        end
+                        mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, num_ch_wlan_s * CHANNEL_WIDTH_MHz,...
+                           SINGLE_USER_SPATIAL_STREAMS, mcs_indexes(wlan_ix, log2(num_ch_wlan_s)+1));
                         
                         Q(origin_s_ix, destination_s_ix) = mu_s;
                         T_PSI(origin_psi_ix, destination_psi_ix) = BACKWARD_TRANSITION;

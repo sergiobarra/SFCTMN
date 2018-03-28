@@ -68,7 +68,7 @@ disp([LOG_LVL3 'System configuration loaded!'])
 
 % Get WLANs info from input CSV file
 disp([LOG_LVL2 'Processing WLAN input...'])
-filename = './input/wlans_input2.csv';   % Path to WLAN input file
+filename = './input/wlans_input.csv';   % Path to WLAN input file
 [wlans, num_channels_system, num_wlans] = generate_wlans(filename);
 
 % HARDCODING distance for convenience
@@ -94,14 +94,19 @@ disp([LOG_LVL3 'Checking input configuration...'])
 check_input_config(wlans);
 disp([LOG_LVL4 'WLANs input file processed successfully!'])
 
-% Display WLANs information
-interest_power = compute_power_received(distance_ap_sta, POWER_TX_DEFAULT, GAIN_TX_DEFAULT,...
-    GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);
+% Compute the power received in each STA by each AP
+for wlan_ix = 1 : num_wlans
+    tx_power_per_wlan = wlans(wlan_ix).tx_power;
+end
+power_sta_from_ap = compute_power_received(distance_ap_sta, tx_power_per_wlan, ...
+    GAIN_TX_DEFAULT, GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);
 
-mcs_indexes = compute_MCS(interest_power, num_channels_system);
+% Compute the MCS that each WLAN can use for each number of channels
+mcs_indexes = compute_mcs(power_sta_from_ap, num_channels_system);
 
-sinr_isolation = compute_sinr(interest_power, 0, NOISE_DBM);    % SINR sensed in the STA in isolation (just considering ambient noise)
-
+% SINR sensed in the STA in isolation (just considering ambient noise)
+%  - NOT USED
+sinr_isolation = compute_sinr(power_sta_from_ap, 0, NOISE_DBM);    
 display_wlans(wlans, flag_display_wlans, flag_plot_wlans, flag_plot_ch_allocation, num_channels_system,...
     path_loss_model, carrier_frequency, sinr_isolation)
 
@@ -128,8 +133,8 @@ disp(' ')
 disp([LOG_LVL1 'Computing interference sensed power by the STAs in every state (Power_PSI). It may take some minutes :) ...'])
 %Power_PSI_cell = compute_sensed_power(wlans, num_global_states, num_channels_system, PSI_cell, path_loss_model,...
 %    carrier_frequency);
-[ Power_AP_PSI_cell Power_STA_PSI_cell SINR_cell] = compute_sensed_power(wlans, num_global_states, PSI_cell, path_loss_model,...
-        carrier_frequency, 0, interest_power, distance_ap_ap, distance_ap_sta, num_channels_system);
+[ Power_AP_PSI_cell, Power_STA_PSI_cell, SINR_cell] = compute_sensed_power(wlans, num_global_states, PSI_cell, path_loss_model,...
+        carrier_frequency, 0, power_sta_from_ap, distance_ap_ap, distance_ap_sta, num_channels_system);
 disp([LOG_LVL2 'Sensed power computed!'])
 
 %% FEASIBLE STATES SPACE (S)
@@ -175,11 +180,10 @@ disp([LOG_LVL1 'Computing throughput...'])
 
 % get_throughput now per states
 %throughput = get_throughput(prob_tx_num_channels_success, num_wlans, num_channels_system, mcs_indexes);
-throughput = get_throughput(wlans, num_wlans, p_equilibrium, S_cell, PSI_cell, SINR_cell, mcs_indexes, interest_power);
+throughput = get_throughput(wlans, num_wlans, p_equilibrium, S_cell, PSI_cell, SINR_cell, mcs_indexes, power_sta_from_ap);
 
 proportional_fairness = sum(log(throughput));
 disp([LOG_LVL2 'Trhoughput computed!'])
-
 
 %% Save results
 disp('--------------------------------------------------------')
@@ -188,9 +192,7 @@ save('main_results.mat') % Save all variables (workspace) in file 'results.mat'
 disp([LOG_LVL2 'Results saved successfully!'])
 disp('--------------------------------------------------------')
 
-
 %% Display info and plot
-
 disp(' ');
 disp(' ');
 disp([LOG_LVL1 '***** DISPLAYING RESULTS *****']);
@@ -260,7 +262,7 @@ if flag_display_throughput
     for w = 1 : num_wlans
         disp([LOG_LVL4 LABELS_DICTIONARY(w) ': ' num2str(throughput(w))]);        
     end
-    throughput'
+    %throughput'
     disp([LOG_LVL3 'Total: ' num2str(sum(throughput))]);
     disp([LOG_LVL3 'Proportional fairness: ' num2str(proportional_fairness)]);
 end

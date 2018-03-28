@@ -25,12 +25,12 @@ function [ throughput ] = get_throughput(  wlans, num_wlans, p_equilibrium, ...
 
         pi_s = p_equilibrium(state_ix); % probability of being in state s
         
-        disp(['State ix: ' num2str(state_ix)])
-        disp(['pi_s: ' num2str(pi_s)])
+%         disp(['State ix: ' num2str(state_ix)])
+%         disp(['pi_s: ' num2str(pi_s)])
 
         for wlan_ix = 1 : num_wlans
 
-            disp([' * WLAN ix: ' num2str(wlan_ix)])
+%             disp([' * WLAN ix: ' num2str(wlan_ix)])
 
             interest_power = power_from_ap(wlan_ix, wlan_ix);
 
@@ -58,13 +58,6 @@ function [ throughput ] = get_throughput(  wlans, num_wlans, p_equilibrium, ...
 
                     end
                 end
-                
-                disp(['    * WLAN ix: ' num2str(wlan_ix)])   
-                disp(['    * sinr: ' num2str(sinr)])   
-                disp(['    * interest_power: ' num2str(interest_power)])   
-                disp(['    * CCA: ' num2str(wlans(wlan_ix).cca)])  
-                disp(['    * num_channels: ' num2str(num_channels)])  
-                disp(['    * MCS used: ' num2str(mcs_per_wlan(wlan_ix, log2(num_channels)+1))])
 
                 % Clear tx_time
                 tx_time = 0;
@@ -72,7 +65,7 @@ function [ throughput ] = get_throughput(  wlans, num_wlans, p_equilibrium, ...
                 if capture_effect_accomplished
 
                     tx_time = SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, ...
-                       num_channels, SINGLE_USER_SPATIAL_STREAMS, ...
+                       num_channels * CHANNEL_WIDTH_MHz, SINGLE_USER_SPATIAL_STREAMS, ...
                        mcs_per_wlan(wlan_ix, log2(num_channels)+1));
                       
                     mu = 1/tx_time;     
@@ -86,8 +79,6 @@ function [ throughput ] = get_throughput(  wlans, num_wlans, p_equilibrium, ...
                 throughput(wlan_ix) = throughput(wlan_ix) + (1 - PACKET_ERR_PROBABILITY) * NUM_PACKETS_AGGREGATED *...
                     PACKET_LENGTH * mu * pi_s ./ 1E6;  
                 
-                disp([' * throughput: ' num2str(throughput(wlan_ix))])  
-
             end
 
         end

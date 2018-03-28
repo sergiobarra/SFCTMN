@@ -6,7 +6,7 @@
 %%% * More info on https://www.upf.edu/en/web/sergiobarrachina          *
 %%% *********************************************************************
 
-function [ Power_AP_PSI_cell Power_STA_PSI_cell SINR_cell ] = compute_sensed_power( wlans, num_global_states, PSI_cell,...
+function [ Power_AP_PSI_cell, Power_STA_PSI_cell, SINR_cell ] = compute_sensed_power( wlans, num_global_states, PSI_cell,...
         path_loss_model, carrier_frequency, flag_general_logs, power_sta_from_ap, distance_ap_ap, distance_ap_sta, num_channels_system)
     %COMPUTE_SENSED_POWER computes the sensed power of each WLAN in every channel in every global state. 
     % Input:
@@ -93,16 +93,11 @@ function [ Power_AP_PSI_cell Power_STA_PSI_cell SINR_cell ] = compute_sensed_pow
                 P_STA_PSI_linear_cell{psi_ix}(wlan_ix, c) = sum_power_rx_sta_linear;
                 Power_STA_PSI_cell{psi_ix}(wlan_ix, c) = 10 * log10(P_STA_PSI_linear_cell{psi_ix}(wlan_ix,c));
                                    
-                % FRANKY: Compute the SINR for state "psi_ix" at WLAN "wlan_ix" in channel "c"
+                % Compute the SINR for state "psi_ix" at WLAN "wlan_ix" in channel "c"
                 if PSI_cell{psi_ix}(wlan_ix, c) == 1    
                     intra_wlan_power = power_sta_from_ap(wlan_ix, wlan_ix) - 3 * (n_channels_used_for_tx-1);
                     interference_power = pow2db(db2pow(Power_STA_PSI_cell{psi_ix}(wlan_ix,c)));
                     SINR = compute_sinr(intra_wlan_power, interference_power, NOISE_DBM);        
-%                     disp(['WLAN ix: ' num2str(wlan_ix)])
-%                     disp(['psi ix: ' num2str(psi_ix)])
-%                     disp(['intra_wlan_power: ' num2str(intra_wlan_power)])
-%                     disp(['interference_power: ' num2str(interference_power)])
-%                     disp(['SINR: ' num2str(SINR)])
                 else                    
                     SINR = -Inf;                    
                 end                 

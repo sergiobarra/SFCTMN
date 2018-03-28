@@ -1,4 +1,4 @@
-function mcs_per_wlan = compute_MCS(power_from_ap, num_channels)
+function mcs_per_wlan = compute_mcs(power_from_ap, num_channels_system)
 % MCS_PER_WLAN computes the allowed Modulation Coding Scheme for each WLAN
 % transmitting in different number of channels
 % INPUT:
@@ -11,11 +11,11 @@ function mcs_per_wlan = compute_MCS(power_from_ap, num_channels)
     load('constants.mat');  % Load constants into workspace
 
     num_wlans = size(power_from_ap, 2);
-    mcs_per_wlan = zeros(num_wlans, num_channels);    
+    mcs_per_wlan = zeros(num_wlans, num_channels_system);    
     
     for wlan_ix = 1 : num_wlans
         
-        for ch_ix = 1 : (log2(num_channels) + 1) 	% For 1, 2, 4 and 8 channels
+        for ch_ix = 1 : (log2(num_channels_system) + 1) 	% For 1, 2, 4 and 8 channels
 
             if power_from_ap(wlan_ix, wlan_ix) < -82 +((ch_ix-1)*3) 
                 mcs_per_wlan(wlan_ix, ch_ix) = MODULATION_FORBIDDEN;
@@ -39,11 +39,10 @@ function mcs_per_wlan = compute_MCS(power_from_ap, num_channels)
                 mcs_per_wlan(wlan_ix, ch_ix) = MODULATION_256QAM_3_4;
             elseif (power_from_ap(wlan_ix, wlan_ix) >= -57 + ((ch_ix-1)*3) && power_from_ap(wlan_ix, wlan_ix) < -54 +((ch_ix-1)*3))
                 mcs_per_wlan(wlan_ix, ch_ix) = MODULATION_256QAM_5_6;
-            else
-%             elseif (power_from_ap(wlan_ix, wlan_ix) >= -54 + (ch_ix*3) && power_from_ap(wlan_ix, wlan_ix) < -52 +(ch_ix*3))
+            elseif (power_from_ap(wlan_ix, wlan_ix) >= -54 + (ch_ix*3) && power_from_ap(wlan_ix, wlan_ix) < -52 +(ch_ix*3))
                 mcs_per_wlan(wlan_ix, ch_ix) = MODULATION_1024QAM_3_4;
-%             else
-%                 mcs_per_wlan(wlan_ix, ch_ix) = MODULATION_1024QAM_5_6;
+            else
+                mcs_per_wlan(wlan_ix, ch_ix) = MODULATION_1024QAM_5_6;
             end
 
         end
