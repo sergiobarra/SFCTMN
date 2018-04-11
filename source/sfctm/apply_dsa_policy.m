@@ -133,7 +133,7 @@ function [ psi_forward, alpha ] = apply_dsa_policy( dsa_policy, possible_forward
                         % Power sensed in channel ch
                         power_sensed = Power_PSI_cell{psi_possible_ix}(wlan_ix,ch_ix);
                         
-                        if power_sensed > wlans(wlann_ix).cca
+                        if power_sensed > wlans(wlan_ix).cca
                             cca_accomplished = false;
                         end
                     end
