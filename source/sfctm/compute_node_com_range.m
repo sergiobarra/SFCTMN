@@ -38,6 +38,11 @@ function [ range ] = compute_node_com_range(path_loss_model, power_tx, sensitivi
             % Hardcoded for power_tx = 15 dBm, CCA = -82 dBm in 5GHz
             range = 40;
             
+        case PATH_LOSS_ROOM_CORRIDOR_5250KHZ
+            
+            % To be fixed
+            range = 10;
+            
         otherwise
              error('Unknwown path loss model!')
     end

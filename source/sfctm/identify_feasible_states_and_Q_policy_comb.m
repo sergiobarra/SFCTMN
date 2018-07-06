@@ -5,7 +5,7 @@
 % - Therefore, there are 64 possible combinations
 
 function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_and_Q_policy_comb( PSI_cell, Power_PSI_cell,...
-        num_channels_system, wlans, dsa_policy_vector, logs_algorithm_on )
+        num_channels_system, wlans, dsa_policy_vector, mcs_indexes, logs_algorithm_on )
     
     load('constants.mat');  % Load constants into workspace
     load('system_conf.mat');    % Load system configuration
@@ -99,8 +99,12 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states ] = identify_feasible_states_a
                         % Departure rate of WLAN wlan in current state s
                         % - Sergio on 5 Oct 2017, replace hardcoded mu by 802.11ax computation
                         % - mu_s = MU(num_ch_wlan_s);
-                        mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, num_ch_wlan_s * 20,...
-                            SINGLE_USER_SPATIAL_STREAMS,MCS_INDEX);
+                        
+                        T_su = ieee11axSUtransmission(...
+                            PACKET_LENGTH, NUM_PACKETS_AGGREGATED, num_ch_wlan_s * CHANNEL_WIDTH_MHz,...
+                            SINGLE_USER_SPATIAL_STREAMS, mcs_indexes(wlan_ix, log2(num_ch_wlan_s)+1));
+                        
+                        mu_s = 1 / T_su;
                         
                         Q(origin_s_ix, destination_s_ix) = mu_s;
                         T_PSI(origin_psi_ix, destination_psi_ix) = BACKWARD_TRANSITION;

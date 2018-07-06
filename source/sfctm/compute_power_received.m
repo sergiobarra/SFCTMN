@@ -14,18 +14,18 @@ function [ power_rx ] = compute_power_received(distance, power_tx, G_tx, G_rx, f
     %   - power_tx: transmission power [dBm]
     %   - G_tx: gain at the transmitter [dB]
     %   - G_rx: gain at the receiver [dB]
-    %   - f: carrier frequency
+    %   - f: carrier frequency [Hz]
     %   - path_loss_model: path loss model index
     % Output:
     %   - power_rx: power received [dBm]
     
     load('constants.mat');  % Load constants into workspace
-
+    
     switch path_loss_model
         
         case PATH_LOSS_FREE_SPACE
             
-            loss = 20 * log10(distance) + 20 * log10(f) + 20 * log10(4*pi/LIGHT_SPEED); 
+            loss = 20 * log10(distance) + 20 * log10(f) - 147.55;
             
         case PATH_LOSS_URBAN_MACRO
             
@@ -69,6 +69,16 @@ function [ power_rx ] = compute_power_received(distance, power_tx, G_tx, G_rx, f
             PL0 = 30;
             gamma = 4.4;
             loss = PL0 + 10*gamma*log10(distance);
+            
+        case PATH_LOSS_ROOM_CORRIDOR_5250KHZ
+                       
+            d_BP = 9;
+            
+            if distance <= d_BP
+               loss = 53.2 + 25.8 * log10(distance);
+            else 
+               loss = 56.4 + 29.1 * log10(distance);
+            end
                                                
         otherwise
              error('Unknwown path loss model!')

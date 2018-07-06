@@ -32,7 +32,8 @@ INPUT_FIELD_POS_STA_Y = 12;                     % Index of pos Y in the input fi
 INPUT_FIELD_POS_STA_Z = 13;                     % Index of pos Z in the input file
 
 % Labels
-LABELS_DICTIONARY_PATH_LOSS = ['Free Space ';'Urban Macro';'Urban Pico ';'In-door sh.';'8011ax Res.';'8011ax Res.'];
+LABELS_DICTIONARY_PATH_LOSS = ...
+    ['Free Space ';'Urban Macro';'Urban Pico ';'In-door sh.';'8011ax Res.';'8011ax Res.';'Corridor525'];
 LABELS_DICTIONARY_ACCESS_PROTOCOL = ['Log2maps';'Adjacent';'IE802.11'];
 LABELS_DICTIONARY_DSA_POLICY = ['Aggressive';'OnlyMax   ';'ExplorerUn';'ExplorerLa'; 'OnlyPrim  '];
 
@@ -45,8 +46,6 @@ ACCESS_PROTOCOL_IEEE80211 = 2;                  % IEEE 802.11 channel access pro
 LABELS_DICTIONARY = ['A';'B';'C';'D';'E';'F';'G';'H';'I';'K'];  % Encoding of WLAN labels. From code to label (e.g. 2 --> B)
 COLORS_DICTIONARY = [.9 .9 0; .9 0 .9; 0 .9 .9; .9 0 0;...
     0 .9 0; 0 0 .9; .5 .5 .5; .2 .5 .2; .9 .5 .1; .1 .5 .9];  % Encoding of colors
-
-MU = [81.5727 150.8068 0 215.7497 0 0 0 284.1716];  % Packet departure rate depending on the number of channels (1, 2, 3, ..., 8)
 
 % DCB policies
 DSA_POLICY_AGGRESSIVE = 1;                      % DCB policy for picking always the maximum channel width available
@@ -71,22 +70,23 @@ PATH_LOSS_URBAN_MICRO = 3;                      % Pico/hotzone deployment
 PATH_LOSS_INDOOR_SHADOWING = 4;                 % WLAN indorr path loss model
 PATH_LOSS_AX_RESIDENTIAL = 5;                   % % Retrieved from: https://mentor.ieee.org/802.11/dcn/14/11-14-0882-04-00ax-tgax-channel-model-document.docx
 PATH_LOSS_WMN_SEMINAR = 6;
+PATH_LOSS_ROOM_CORRIDOR_5250KHZ = 7;             % Xu et al. Indoor Office Propagation Measurements and Path Loss Models at 5.25 GHz“, IEEE VTC 2007.
+                                                % dual-slope log-distance model in room-corridor condition
 
-% MCS indexes
+% IEEE 11ax MCS indexes
 MODULATION_FORBIDDEN = -1;
-MODULATION_NONE = 0;
-MODULATION_BPSK_1_2 = 1;
-MODULATION_QPSK_1_2 = 2;
-MODULATION_QPSK_3_4 = 3;
-MODULATION_16QAM_1_2 = 4;
-MODULATION_16QAM_3_4 = 5;
-MODULATION_64QAM_2_3 = 6;
-MODULATION_64QAM_3_4 = 7;
-MODULATION_64QAM_5_6 = 8;
-MODULATION_256QAM_3_4 = 9;
-MODULATION_256QAM_5_6 = 10;
-MODULATION_1024QAM_3_4 = 11;
-MODULATION_1024QAM_5_6 = 12;
+MODULATION_BPSK_1_2 = 0;
+MODULATION_QPSK_1_2 = 1;
+MODULATION_QPSK_3_4 = 2;
+MODULATION_16QAM_1_2 = 3;
+MODULATION_16QAM_3_4 = 4;
+MODULATION_64QAM_2_3 = 5;
+MODULATION_64QAM_3_4 = 6;
+MODULATION_64QAM_5_6 = 7;
+MODULATION_256QAM_3_4 = 8;
+MODULATION_256QAM_5_6 = 9;
+MODULATION_1024QAM_3_4 = 10;
+MODULATION_1024QAM_5_6 = 11;
 
 % PHY constants
 LIGHT_SPEED = 3E8;                              % Speed of light [m/s]

@@ -14,7 +14,7 @@ Just [Matlab](https://www.mathworks.com/) is required.
 ### Usage
  
  * Set the system WLANs' scenario and configuration in files ```wlans_input.csv```, ```constants_script.m``` and ```system_conf.m```. 
- * Run main file ```main_sfctmn.m``` to display the analysis results.
+ * Run main file ```main_sfctmn.m``` to display the analysis results. Add to the Matlab path any necessary files.
  * (*) New DCB policies may be defined in file ```apply_dsa_policy.m```.
  
  <p align="center">

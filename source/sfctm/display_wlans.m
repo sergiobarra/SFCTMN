@@ -41,7 +41,6 @@ function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_p
                 ', ' num2str(wlans(wlan_ix).position_sta(3)) ') m'])
             disp([LOG_LVL5 'Transmission power: '  num2str(wlans(wlan_ix).tx_power) ' dBm'])
             disp([LOG_LVL5 'CCA level: '  num2str(wlans(wlan_ix).cca) ' dBm'])
-            disp([LOG_LVL6 'SINR isolated at ' num2str(POWER_TX_DEFAULT) ' dBm: '  num2str(sinr_isolation) ' dB'])
             disp([LOG_LVL5 'lambda: '  num2str(wlans(wlan_ix).lambda) ' packets/s'])
         end
     end
