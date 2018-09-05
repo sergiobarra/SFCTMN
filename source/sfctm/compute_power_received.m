@@ -43,10 +43,8 @@ function [ power_rx ] = compute_power_received(distance, power_tx, G_tx, G_rx, f
             gamma = 5;        % Gamma factor (depends on central frequency)
             % loss = PL0 + 10 * gamma * log10(distance) + shadowing/2 + (distance/10) .* obstacles/2;  
             loss = PL0 + 10 * gamma * log10(distance);
-            
-            
-        % Retrieved from: https://mentor.ieee.org/802.11/dcn/14/11-14-0882-04-00ax-tgax-channel-model-document.docx
-        % IEEE 802.11ax uses the TGn channel B path loss model for performance evaluation of simulation scenario #1
+                      
+ 		% IEEE 802.11ax uses the TGn channel B path loss model for performance evaluation of simulation scenario #1
         % with extra indoor wall and floor penetration loss.
         case PATH_LOSS_AX_RESIDENTIAL
             
@@ -60,9 +58,11 @@ function [ power_rx ] = compute_power_received(distance, power_tx, G_tx, G_rx, f
                breakpoint_loss = 0;
             end
 
-            loss = 40.05 + 20*log10(f/2.4) + 20 * log10(min(distance,5)) + ...
+            frequency_ghz = f / 1e9;
+            
+            loss = 40.05 + 20*log10(frequency_ghz/2.4) + 20 * log10(min(distance,5)) + ...
                    breakpoint_loss + 18.3*(distance/n_floors)^(((distance/n_floors)+2)/...
-                   ((distance/n_floors)+1) - 0.46) + 5*(distance/n_walls);       
+                   ((distance/n_floors)+1) - 0.46) + 5*(distance/n_walls);            
             
         case PATH_LOSS_WMN_SEMINAR
             
