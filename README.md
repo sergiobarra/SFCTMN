@@ -28,6 +28,8 @@ Just [Matlab](https://www.mathworks.com/) is required.
 
 ### Support
 
+This [slides](https://github.com/sergiobarra/SFCTMN/blob/master/documentation/sfctmn_introductory_presentation.pdf) by Francesc Wilhelmi contain a basic introduction to SFCTMN
+
 You can contact me for any issue you may have when using the SFCTMN framework at sergio.barrachina@upf.edu
 
 ### Contributing
