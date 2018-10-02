@@ -24,17 +24,17 @@ flag_save_console_logs = false;     % Flag for saving the console logs in a text
 % - Display
 flag_display_PSI_states = false;     % Flag for displaying PSI's CTMC states
 flag_display_S_states = false;       % Flag for displaying S' CTMC states
-flag_display_wlans = true;         % Flag for displaying WLANs' input info
-flag_display_Power_PSI = true;         % Flag for displaying sensed powers
+flag_display_wlans = false;         % Flag for displaying WLANs' input info
+flag_display_Power_PSI = false;         % Flag for displaying sensed powers
 flag_display_Q_logical = false;     % Flag for displaying logical transition rate matrix
 flag_display_Q = false;              % Flag for displaying transition rate matrix
 flag_display_throughput = true;     % Flag for displaying the throughput
 
 % - Plots
 flag_plot_PSI_ctmc = false;          % Flag for plotting PSI's CTMC
-flag_plot_S_ctmc = true;           % Flag for plotting S' CTMC
-flag_plot_wlans = true;            % Flag for plotting WLANs' distribution
-flag_plot_ch_allocation = true;    % Flag for plotting WLANs' channel allocation
+flag_plot_S_ctmc = false;           % Flag for plotting S' CTMC
+flag_plot_wlans = false;            % Flag for plotting WLANs' distribution
+flag_plot_ch_allocation = false;    % Flag for plotting WLANs' channel allocation
 flag_plot_throughput = false;        % Flag for plotting the throughput
 
 % - Logs
@@ -150,17 +150,34 @@ policies_by_wlan = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_ONLY_MAX, DSA_POLICY_ONLY_
 switch num_wlans
     
     case 2
-        dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:));
+        % dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:));
+        
+        % AM AM AM
+        dsa_policy_matrix = [DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_EXPLORER_UNIFORM];
         
     case 3
         % dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:), policies_by_wlan(3,:));
         
-        % dsa_policy_matrix = [DSA_POLICY_ONLY_PRIMARY, DSA_POLICY_ONLY_PRIMARY, DSA_POLICY_ONLY_PRIMARY];
-        % dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_AGGRESSIVE];
-        % dsa_policy_matrix = [DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM];
-        % dsa_policy_matrix = [DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_EXPLORER_UNIFORM];
-        % dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM];
+        % OP OP OP
+        %dsa_policy_matrix = [DSA_POLICY_ONLY_PRIMARY, DSA_POLICY_ONLY_PRIMARY, DSA_POLICY_ONLY_PRIMARY];
+        
+        % AM AM AM
+        %dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_AGGRESSIVE, DSA_POLICY_AGGRESSIVE];
+        
+        % AM PU AM
+        %dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_AGGRESSIVE];
+        
+        % PU AM PU
+        %dsa_policy_matrix = [DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM];
+        
+        % AM AM PU
+        %dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM];
+        
+        % AM PU PU
         dsa_policy_matrix = [DSA_POLICY_AGGRESSIVE, DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_EXPLORER_UNIFORM];
+        
+        % PU PU PU
+        %dsa_policy_matrix = [DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_EXPLORER_UNIFORM, DSA_POLICY_EXPLORER_UNIFORM];
         
     case 4
         dsa_policy_matrix = allcomb(policies_by_wlan(1,:), policies_by_wlan(2,:), policies_by_wlan(3,:), policies_by_wlan(4,:));
@@ -196,6 +213,10 @@ for comb_ix = 1:size(dsa_policy_matrix,1)
     % - The left null space of Q is equivalent to solve [pi] * Q =  [0 0 ... 0 1]
     p_equilibrium = mrdivide([zeros(1,size(Q,1)) 1],[Q ones(size(Q,1),1)]);
     [Q_is_reversible, error_reversible] = isreversible(Q,p_equilibrium,1e-8); % Alessandro code for checking reversibility
+    
+    disp([LOG_LVL2 'Equilibrium distribution found! Prob. of being in each possible state:'])
+    disp(p_equilibrium)
+    disp([LOG_LVL2 'Reversible Markov chain? ' num2str(Q_is_reversible) ' (error: ' num2str(error_reversible) ')'])
     
     [prob_tx_num_channels_success, prob_tx_num_channels_unsuccess] = get_probability_tx_in_n_channels(Power_AP_PSI_cell,...
         S_cell, PSI_cell, num_wlans, num_channels_system, p_equilibrium, path_loss_model, distance_ap_sta, wlans,...

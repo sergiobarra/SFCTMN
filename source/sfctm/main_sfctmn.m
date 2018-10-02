@@ -23,9 +23,9 @@ flag_save_console_logs = false;     % Flag for saving the console logs in a text
 
 % - Display
 flag_display_PSI_states = false;     % Flag for displaying PSI's CTMC states
-flag_display_S_states = false;       % Flag for displaying S' CTMC states
+flag_display_S_states = true;       % Flag for displaying S' CTMC states
 flag_display_wlans = true;         % Flag for displaying WLANs' input info
-flag_display_Power_PSI = true;         % Flag for displaying sensed powers
+flag_display_Power_PSI = false;         % Flag for displaying sensed powers
 flag_display_Q_logical = false;     % Flag for displaying logical transition rate matrix
 flag_display_Q = false;              % Flag for displaying transition rate matrix
 flag_display_throughput = true;     % Flag for displaying the throughput
@@ -94,11 +94,12 @@ check_input_config(wlans);
 disp([LOG_LVL4 'WLANs input file processed successfully!'])
 
 % Compute the power received in each STA by each AP
-for wlan_ix = 1 : num_wlans
-    tx_power_per_wlan = wlans(wlan_ix).tx_power;
+for i = 1 : num_wlans
+    for j = 1 : num_wlans
+        power_sta_from_ap(i,j) = compute_power_received(distance_ap_sta(j,i), wlans(j).tx_power, ...
+            GAIN_TX_DEFAULT, GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);      
+    end
 end
-power_sta_from_ap = compute_power_received(distance_ap_sta, tx_power_per_wlan, ...
-    GAIN_TX_DEFAULT, GAIN_RX_DEFAULT, carrier_frequency, path_loss_model);
 
 % Compute the MCS that each WLAN can use for each number of channels
 mcs_indexes = compute_MCS(power_sta_from_ap, num_channels_system);
