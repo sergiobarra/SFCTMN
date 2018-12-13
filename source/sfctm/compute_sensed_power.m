@@ -67,7 +67,8 @@ function [ Power_AP_PSI_cell, Power_STA_PSI_cell, SINR_cell ] = compute_sensed_p
                                                         
                             % Transmission power must be divided by the number of channels 
                             [~, ~, ~, num_channels, ~] = get_channel_range( PSI_cell{psi_ix}(w_aux,:) );
-                            tx_power = wlans(w_aux).tx_power - 3 * (num_channels - 1);    % 3dB less
+                            
+                            tx_power = wlans(w_aux).tx_power - 3 * log2(num_channels);    % 3dB 
                                                         
                             % Compute the power received in the AP
                             pw_rx_ap_dBm = compute_power_received(distance_w_ap, tx_power,...
