@@ -18,6 +18,13 @@ function [labels_ctmc] = plot_ctmc( S, num_wlans, num_channels_system, plot_titl
     
     load('constants.mat');  % Load constants into workspace
     
+    % Set font type
+    set(0,'defaultUicontrolFontName','Helvetica');
+    set(0,'defaultUitableFontName','Helvetica');
+    set(0,'defaultAxesFontName','Helvetica');
+    set(0,'defaultTextFontName','Helvetica');
+    set(0,'defaultUipanelFontName','Helvetica');
+
     num_columns_ctmc = num_wlans + 1;                   % Number of columns in the CTMC graph
     labels_ctmc{size(S,1)} = [];                        % Labels of the CTMC states
     labels_ctmc{1} = 'Empty (s1)';                      % Label of first state (s1) is "Empty"
@@ -29,21 +36,31 @@ function [labels_ctmc] = plot_ctmc( S, num_wlans, num_channels_system, plot_titl
         label_string = '';
         for n = 1 : num_wlans   % foreach wlan
             for c = 1 : num_channels_system
-                if S(s,n,c) == true     % If channel c being used by WLAN n in state s
+                if S(s,n,c) > 0     % If channel c being used by WLAN n in state s
                     pos_ctmc_nodes(1,s) = pos_ctmc_nodes(1,s) + 1;  % Set X position (column)
-                    ch_range = find(S(s,n,:) == true);              % Channel range being used by WLAN n in state s 
-                    min_max_channels(n,:) = [ch_range(1) ch_range(end)];
+%                     ch_range = find(S(s,n,:) == true);              % Channel range being used by WLAN n in state s 
+%                     min_max_channels(n,:) = [ch_range(1) ch_range(end)];
+                    min_max_channels(n,:) = [1 1];
                     break
                 end
             end
 
+            if S(s,n,c) == STATE_NONSRG_ACTIVATED % Add extra text to label in case of SR
+                state_label = strcat([LABELS_DICTIONARY(n) '(SR_{non-SRG})']);
+            elseif S(s,n,c) == STATE_SRG_ACTIVATED % Add extra text to label in case of SR
+                state_label = strcat([LABELS_DICTIONARY(n) '(SR_{SRG})']);
+            else 
+                state_label = LABELS_DICTIONARY(n);
+            end            
+            
             if min_max_channels(n,1) ~= 0 % If WLAN is transmitting in this state (i.e., min channel used must be true)
                 % Add WLAN and range to state label
                 label_string = strcat(label_string,... 
-                    [LABELS_DICTIONARY(n) '_{' num2str(min_max_channels(n,1)) '}^'  num2str(min_max_channels(n,2))]);
+                    [state_label '_{' num2str(min_max_channels(n,1)) '}^'  num2str(min_max_channels(n,2))]);
             else % If WLAN is unactive
                 label_string = strcat(label_string, '');
-            end        
+            end                 
+            
         end
         labels_ctmc{s} = strcat(label_string, ['(s' num2str(s) ')']);   % Include state identifier in the label
     end
@@ -109,6 +126,7 @@ function [labels_ctmc] = plot_ctmc( S, num_wlans, num_channels_system, plot_titl
     xlim([min_x max_x]);
     ylim([min_y max_y]);
     title(plot_title);
+    set(gca, 'FontSize', 16)
     set(gca,'xticklabel',[]);
     set(gca,'yticklabel',[]);
     grid on;

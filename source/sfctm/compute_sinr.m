@@ -14,16 +14,17 @@ function sinr = compute_sinr(interest_power, interference_power, noise_power)
     %   - noise_power: ambient noise power [dBm]
     % Output:
     %   - sinr: SINR [dB]
-    
-    interest_power_mw = 10^(interest_power/10);
+        
+    interest_power_mw = db2pow(interest_power);
           
-    interference_power_mw = 10^(interference_power/10);
+    interference_power_mw = db2pow(interference_power);
 
-    noise_power_mw = 10^(noise_power/10);
+    noise_power_mw = db2pow(noise_power);
 
     sinr_linear = interest_power_mw / (interference_power_mw + noise_power_mw);
 
-    sinr = 10 * log10(sinr_linear);    
+    sinr = pow2db(sinr_linear);
+    
     
 end
 

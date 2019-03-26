@@ -19,7 +19,7 @@ function [ is_config_ok ] = check_input_config( wlans )
     num_wlans = length(wlans);  % Number of WLANs in the system
     
     for wlan_ix = 1 : num_wlans
-    
+                
         % Primary channel must be inside the channel range
         channels_in_range = wlans(wlan_ix).range(1) : wlans(wlan_ix).range(2);
         

@@ -11,10 +11,17 @@ function [ ] = plot_throughput( throughput, num_wlans, plot_title )
     %   - throughput: array whose element w is the average throughput of WLAN w
     %   - num_wlans: number of WLANs in the system
     
-    load('constants.mat');  % Load constants into local workspace
+    load('constants.mat');  % Load constants into workspace
     
     figure
     hold on
+    
+    % Set font type
+    set(0,'defaultUicontrolFontName','Helvetica');
+    set(0,'defaultUitableFontName','Helvetica');
+    set(0,'defaultAxesFontName','Helvetica');
+    set(0,'defaultTextFontName','Helvetica');
+    set(0,'defaultUipanelFontName','Helvetica');
     
     % WLANs throughput
     for wlan_ix = 1 : num_wlans
@@ -28,7 +35,7 @@ function [ ] = plot_throughput( throughput, num_wlans, plot_title )
     ticks_labels(num_wlans + 1, 1) = 'm';
     h = bar(num_wlans + 1, average_throughput);                  
     set(h, 'FaceColor',  [0.5 0.5 0.5]);
-
+    set(gca, 'FontSize', 16)
     xticklabels(ticks_labels)
     ticks_position = 1 : num_wlans + 1;
     set(gca, 'XTick',ticks_position, 'XTickLabel',ticks_labels)

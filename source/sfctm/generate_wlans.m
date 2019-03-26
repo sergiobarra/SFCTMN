@@ -5,7 +5,7 @@
 %%% * More info on https://www.upf.edu/en/web/sergiobarrachina          *
 %%% *********************************************************************
 
-function [ wlans, num_channels_system, num_wlans ] = generate_wlans( wlan_input_filename )
+function [ wlans, num_wlans ] = generate_wlans( wlan_input_filename )
     %GENERATE_WLANS generate the wlan structures given a WLAN input .csv file
     % Input:
     %   - wlan_input_filename: path of the .csv file
@@ -14,15 +14,16 @@ function [ wlans, num_channels_system, num_wlans ] = generate_wlans( wlan_input_
     %   - num_channels_system: number of basic channels in the system
     
     load('constants.mat');  % Load constants into workspace
+    load('system_conf.mat');
     
     % Generate wlan structures
-    input_data = load(wlan_input_filename);
+    input_data = load(wlan_input_filename);  
     wlans = []; % Array of structures containning wlans info
     num_wlans = length(input_data(:,1));    % Number of WLANs (APs)
-    num_channels_system = 0;                % Number of channels in the system (is determined the most right channel used)
-    
+    %num_channels_system = 0;                % Number of channels in the system (is determined the most right channel used)
+
     for w = 1 : num_wlans
-        
+
         wlans(w).code = input_data(w,INPUT_FIELD_IX_CODE);          % Pick WLAN code
         wlans(w).primary = input_data(w,INPUT_FIELD_PRIMARY_CH);    % Pick primary channel
         wlans(w).range = [input_data(w,INPUT_FIELD_LEFT_CH) input_data(w,INPUT_FIELD_RIGHT_CH)];  % pick range
@@ -32,19 +33,20 @@ function [ wlans, num_channels_system, num_wlans ] = generate_wlans( wlan_input_
             input_data(w,INPUT_FIELD_POS_STA_Z)];                       % Pick STA positions
         wlans(w).tx_power = input_data(w,INPUT_FIELD_TX_POWER);     % Pick transmission power
         wlans(w).cca = input_data(w,INPUT_FIELD_CCA);               % Pick CCA level
-        CWmin = input_data(w,INPUT_FIELD_CW);
-        if (CWmin == 1)
-            CWmin = CWmin + 0.00000001;
-        end
-        EB = (CWmin-1)/2;
-        wlans(w).lambda = 1/(EB * TIME_SLOT);         % Pick lambda
-        wlans(w).states = [];   % Instantiate states for later use
+        %wlans(w).lambda = input_data(w,INPUT_FIELD_LAMBDA);         % Pick lambda
+        wlans(w).cw = input_data(w,INPUT_FIELD_CW);                 % Pick CW
+        wlans(w).lambda = 1 / (T_symbol * (wlans(w).cw - 1)/2);          % Compute lambda      
+        wlans(w).legacy = input_data(w,INPUT_FIELD_LEGACY);         % legacy devices
+        wlans(w).states = [];   % Instantiate states for later use          
         wlans(w).widths = [];   % Instantiate acceptable widhts item for later use
+        wlans(w).bandwidth = CHANNEL_WIDTH;
+        % Rate for ONLY 1 channel: to be determined according to the SINR
+        wlans(w).rate_one_channel = 0;      
         
-        if(num_channels_system <  wlans(w).range(2))
-            num_channels_system = wlans(w).range(2);         % update number of channels present in the system
-        end
-        
+%         if(num_channels_system <  wlans(w).range(2))
+%             num_channels_system = wlans(w).range(2);         % update number of channels present in the system
+%         end
+
     end
     
 end

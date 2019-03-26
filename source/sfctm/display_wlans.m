@@ -7,7 +7,7 @@
 %%% *********************************************************************
 
 function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_plot_ch_allocation, num_channels_system, ...
-        path_loss_model, carrier_frequency, sinr_isolation)
+        path_loss_model, carrier_frequency)
     %DISPLAY_WLANS displays WLANs' input info
     % Input:
     %   - wlans: array of structures with wlans info
@@ -17,10 +17,8 @@ function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_p
     %   - num_channels_system: number of channels in the system
     %   - path_loss_model: path loss model
     %   - carrier_frequency: carrier frequency 
-    %   - sinr_isolation: ideal SINR when WLAN is isolated (just considering ambient noise)
     
-    load('constants.mat');  % Load constants into local workspace
-    load('system_conf.mat');  % Load system configuration into local workspace
+    load('constants.mat');  % Load constants into workspace
     
     num_wlans = length(wlans);  % Number of WLANs in the system
         
@@ -42,6 +40,11 @@ function [ ] = display_wlans( wlans, flag_display_wlans, flag_plot_wlans, flag_p
             disp([LOG_LVL5 'Transmission power: '  num2str(wlans(wlan_ix).tx_power) ' dBm'])
             disp([LOG_LVL5 'CCA level: '  num2str(wlans(wlan_ix).cca) ' dBm'])
             disp([LOG_LVL5 'lambda: '  num2str(wlans(wlan_ix).lambda) ' packets/s'])
+            disp([LOG_LVL5 'SRG: '  num2str(wlans(wlan_ix).srg)])
+            disp([LOG_LVL5 'non-SRG OBSS_PD: '  num2str(wlans(wlan_ix).non_srg_obss_pd)])
+            disp([LOG_LVL5 'SRG OBSS_PD: '  num2str(wlans(wlan_ix).srg_obss_pd)])
+            disp([LOG_LVL5 'TX PWR REF: '  num2str(wlans(wlan_ix).tx_pwr_ref)])
+
         end
     end
     

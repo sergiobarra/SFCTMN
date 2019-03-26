@@ -1,0 +1,573 @@
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+{Undefined function or variable 'generate_wlan_from_file'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_sfctmn', '/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m', 48)" style="font-weight:bold">main_sfctmn</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',48,0)">line 48</a>)
+wlans = generate_wlan_from_file(input_file, false, false, 1, [], []);
+} 
+opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',48,0)
+main_sfctmn
+
+*********************************************************************
+* Spatial-Flexible CTMN for WLANs                                   *
+* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
+* GitHub repository: https://github.com/sergiobarra/SFCTMN          *
+* More info on https://www.upf.edu/en/web/sergiobarrachina          *
+*********************************************************************
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+Processing input CSV...
+   + Checking input configuration...
+     - WLANs input file processed successfully!
+   + WLANS input info:
+     - wlan A:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (0, 4, 0) m
+          - sta: (0, 0, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+{Reference to non-existent field 'bss_color'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('display_wlans', '/home/administrador/workspace/SFCTMN/source/sfctm/display_wlans.m', 43)" style="font-weight:bold">display_wlans</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/display_wlans.m',43,0)">line 43</a>)
+            disp([LOG_LVL5 'BSS color: '  num2str(wlans(wlan_ix).bss_color)])
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_sfctmn', '/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m', 76)" style="font-weight:bold">main_sfctmn</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',76,0)">line 76</a>)
+display_wlans(wlans, flag_display_wlans, flag_plot_wlans, ...
+} 
+opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/display_wlans.m',43,0)
+main_sfctmn
+
+*********************************************************************
+* Spatial-Flexible CTMN for WLANs                                   *
+* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
+* GitHub repository: https://github.com/sergiobarra/SFCTMN          *
+* More info on https://www.upf.edu/en/web/sergiobarrachina          *
+*********************************************************************
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+Processing input CSV...
+   + Checking input configuration...
+     - WLANs input file processed successfully!
+   + WLANS input info:
+     - wlan A:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (0, 4, 0) m
+          - sta: (0, 0, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 1
+{Reference to non-existent field 'obss_pd'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('display_wlans', '/home/administrador/workspace/SFCTMN/source/sfctm/display_wlans.m', 44)" style="font-weight:bold">display_wlans</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/display_wlans.m',44,0)">line 44</a>)
+            disp([LOG_LVL5 'OBSS_PD: '  num2str(wlans(wlan_ix).obss_pd)])
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_sfctmn', '/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m', 76)" style="font-weight:bold">main_sfctmn</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',76,0)">line 76</a>)
+display_wlans(wlans, flag_display_wlans, flag_plot_wlans, ...
+} 
+opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/display_wlans.m',44,0)
+main_sfctmn
+
+*********************************************************************
+* Spatial-Flexible CTMN for WLANs                                   *
+* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
+* GitHub repository: https://github.com/sergiobarra/SFCTMN          *
+* More info on https://www.upf.edu/en/web/sergiobarrachina          *
+*********************************************************************
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+Processing input CSV...
+   + Checking input configuration...
+     - WLANs input file processed successfully!
+   + WLANS input info:
+     - wlan A:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (0, 4, 0) m
+          - sta: (0, 0, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 1
+        + non-SRG OBSS_PD: -75
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+     - wlan B:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (6, 4, 0) m
+          - sta: (6, 8, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 2
+        + non-SRG OBSS_PD: -82
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+{Undefined function or variable 'check_wlans_types'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('identify_feasible_states_and_Q', '/home/administrador/workspace/SFCTMN/source/sfctm/identify_feasible_states_and_Q.m', 54)" style="font-weight:bold">identify_feasible_states_and_Q</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/identify_feasible_states_and_Q.m',54,0)">line 54</a>)
+    wlans_types = check_wlans_types(wlans);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_sfctmn', '/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m', 112)" style="font-weight:bold">main_sfctmn</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',112,0)">line 112</a>)
+[ Q, S, S_cell, Q_logical_S, Q_logical_PSI, S_num_states, new_mcs_per_wlan_per_state ] =
+identify_feasible_states_and_Q(...
+} 
+main_sfctmn
+
+*********************************************************************
+* Spatial-Flexible CTMN for WLANs                                   *
+* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
+* GitHub repository: https://github.com/sergiobarra/SFCTMN          *
+* More info on https://www.upf.edu/en/web/sergiobarrachina          *
+*********************************************************************
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+Processing input CSV...
+   + Checking input configuration...
+     - WLANs input file processed successfully!
+   + WLANS input info:
+     - wlan A:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (0, 4, 0) m
+          - sta: (0, 0, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 1
+        + non-SRG OBSS_PD: -75
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+     - wlan B:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (6, 4, 0) m
+          - sta: (6, 8, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 2
+        + non-SRG OBSS_PD: -82
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+{Undefined function or variable 'SUtransmission80211ax'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('identify_feasible_states_and_Q', '/home/administrador/workspace/SFCTMN/source/sfctm/identify_feasible_states_and_Q.m', 126)" style="font-weight:bold">identify_feasible_states_and_Q</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/identify_feasible_states_and_Q.m',126,0)">line 126</a>)
+                        mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, ...
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_sfctmn', '/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m', 112)" style="font-weight:bold">main_sfctmn</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',112,0)">line 112</a>)
+[ Q, S, S_cell, Q_logical_S, Q_logical_PSI, S_num_states, new_mcs_per_wlan_per_state ] =
+identify_feasible_states_and_Q(...
+} 
+main_sfctmn
+
+*********************************************************************
+* Spatial-Flexible CTMN for WLANs                                   *
+* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
+* GitHub repository: https://github.com/sergiobarra/SFCTMN          *
+* More info on https://www.upf.edu/en/web/sergiobarrachina          *
+*********************************************************************
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+Processing input CSV...
+   + Checking input configuration...
+     - WLANs input file processed successfully!
+   + WLANS input info:
+     - wlan A:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (0, 4, 0) m
+          - sta: (0, 0, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 1
+        + non-SRG OBSS_PD: -75
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+     - wlan B:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (6, 4, 0) m
+          - sta: (6, 8, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 2
+        + non-SRG OBSS_PD: -82
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+Processing input CSV...
+   + Checking input configuration...
+     - WLANs input file processed successfully!
+   + WLANS input info:
+     - wlan A:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (0, 4, 0) m
+          - sta: (0, 0, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 1
+        + non-SRG OBSS_PD: -75
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+     - wlan B:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (6, 4, 0) m
+          - sta: (6, 8, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 2
+        + non-SRG OBSS_PD: -82
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+main_sfctmn
+
+*********************************************************************
+* Spatial-Flexible CTMN for WLANs                                   *
+* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
+* GitHub repository: https://github.com/sergiobarra/SFCTMN          *
+* More info on https://www.upf.edu/en/web/sergiobarrachina          *
+*********************************************************************
+ 
+Setting framework up...
+- Loading constant variables...
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('load')" style="font-weight:bold">load</a>
+'constants_sfctmn_framework.mat' is not found in the current folder or on the MATLAB path, but exists in:
+    /home/administrador/workspace
+    /home/administrador/workspace/overview_ieee80211ax_spatial_reuse/Code_modified_SR
+
+Change the MATLAB current folder or add its folder to the MATLAB path.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_sfctmn', '/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m', 37)" style="font-weight:bold">main_sfctmn</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',37,0)">line 37</a>)
+load('constants_sfctmn_framework.mat')        % Execute constants_script.m script to store constants in the workspace
+} 
+opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',37,0)
+main_sfctmn
+
+*********************************************************************
+* Spatial-Flexible CTMN for WLANs                                   *
+* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
+* GitHub repository: https://github.com/sergiobarra/SFCTMN          *
+* More info on https://www.upf.edu/en/web/sergiobarrachina          *
+*********************************************************************
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('load')" style="font-weight:bold">load</a>
+'system_conf.mat' is not found in the current folder or on the MATLAB path, but exists in:
+    /home/administrador/workspace
+
+<a href = "matlab:cd '/home/administrador/workspace'">Change the MATLAB current folder</a> or <a href = "matlab:addpath '/home/administrador/workspace'">add its folder to the MATLAB path</a>.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_sfctmn', '/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m', 43)" style="font-weight:bold">main_sfctmn</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',43,0)">line 43</a>)
+load('system_conf.mat');       % Load constants into workspace
+} 
+opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',43,0)
+opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',43,0)
+main_sfctmn
+
+*********************************************************************
+* Spatial-Flexible CTMN for WLANs                                   *
+* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
+* GitHub repository: https://github.com/sergiobarra/SFCTMN          *
+* More info on https://www.upf.edu/en/web/sergiobarrachina          *
+*********************************************************************
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+System configuration saved in file system_conf.mat
+   + System configuration loaded!
+Processing input CSV...
+   + Checking input configuration...
+     - WLANs input file processed successfully!
+   + WLANS input info:
+     - wlan A:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (0, 4, 0) m
+          - sta: (0, 0, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 1
+        + non-SRG OBSS_PD: -75
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+     - wlan B:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (6, 4, 0) m
+          - sta: (6, 8, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 2
+        + non-SRG OBSS_PD: -82
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+- System configuration
+   + Access protocol: IE802.11
+   + DSA policy: OnlyMax   
+   + Path loss model: 8011ax Res.
+   + Carrier frequency: 5e-09 GHz
+ 
+Identifying global state space (PSI)...
+- Global states identified! There are 16 global states.
+ 
+Computing interference sensed power by the STAs in every state (Power_PSI). It may take some minutes :) ...
+- Sensed power computed!
+ 
+Identifying feasible state space (S) and transition rate matrix (Q)...
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('load')" style="font-weight:bold">load</a>
+'constants_sfctmn_framework.mat' is not found in the current folder or on the MATLAB path, but exists in:
+    /home/administrador/workspace
+    /home/administrador/workspace/overview_ieee80211ax_spatial_reuse/Code_modified_SR
+
+Change the MATLAB current folder or add its folder to the MATLAB path.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('PHYParams80211ax', '/home/administrador/workspace/SFCTMN/source/sfctm/MatlabSim11ax/PHYParams80211ax.m', 6)" style="font-weight:bold">PHYParams80211ax</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/MatlabSim11ax/PHYParams80211ax.m',6,0)">line 6</a>)
+  load('constants_sfctmn_framework.mat');
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('SUtransmission80211ax', '/home/administrador/workspace/SFCTMN/source/sfctm/MatlabSim11ax/SUtransmission80211ax.m', 21)" style="font-weight:bold">SUtransmission80211ax</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/MatlabSim11ax/SUtransmission80211ax.m',21,0)">line 21</a>)
+  [Nsc,Ym,Yc,T_OFDM,Legacy_PHYH,HE_PHYH]=PHYParams80211ax(W,MCSindex,SUSS);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('identify_feasible_states_and_Q', '/home/administrador/workspace/SFCTMN/source/sfctm/identify_feasible_states_and_Q.m', 126)" style="font-weight:bold">identify_feasible_states_and_Q</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/identify_feasible_states_and_Q.m',126,0)">line 126</a>)
+                        mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, ...
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_sfctmn', '/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m', 112)" style="font-weight:bold">main_sfctmn</a> (<a href="matlab: opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/main_sfctmn.m',112,0)">line 112</a>)
+[ Q, S, S_cell, Q_logical_S, Q_logical_PSI, S_num_states, new_mcs_per_wlan_per_state ] =
+identify_feasible_states_and_Q(...
+} 
+opentoline('/home/administrador/workspace/SFCTMN/source/sfctm/MatlabSim11ax/PHYParams80211ax.m',6,0)
+main_sfctmn
+
+*********************************************************************
+* Spatial-Flexible CTMN for WLANs                                   *
+* Copyright (C) 2017-2022, and GNU GPLd, by Sergio Barrachina-Munoz *
+* GitHub repository: https://github.com/sergiobarra/SFCTMN          *
+* More info on https://www.upf.edu/en/web/sergiobarrachina          *
+*********************************************************************
+ 
+Setting framework up...
+- Loading constant variables...
+   + Constants loaded!
+- Loading system configuration...
+System configuration saved in file system_conf.mat
+   + System configuration loaded!
+Processing input CSV...
+   + Checking input configuration...
+     - WLANs input file processed successfully!
+   + WLANS input info:
+     - wlan A:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (0, 4, 0) m
+          - sta: (0, 0, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 1
+        + non-SRG OBSS_PD: -75
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+     - wlan B:
+        + primary channel: 1
+        + channel range: 1 - 1
+        + positions:
+          - ap: (6, 4, 0) m
+          - sta: (6, 8, 0) m
+        + Transmission power: 20 dBm
+        + CCA level: -82 dBm
+        + lambda: 14815 packets/s
+        + SRG: 2
+        + non-SRG OBSS_PD: -82
+        + SRG OBSS_PD: -82
+        + TX PWR REF: 21
+- System configuration
+   + Access protocol: IE802.11
+   + DSA policy: OnlyMax   
+   + Path loss model: 8011ax Res.
+   + Carrier frequency: 5e-09 GHz
+ 
+Identifying global state space (PSI)...
+- Global states identified! There are 16 global states.
+ 
+Computing interference sensed power by the STAs in every state (Power_PSI). It may take some minutes :) ...
+- Sensed power computed!
+ 
+Identifying feasible state space (S) and transition rate matrix (Q)...
+- Feasible state space (S) identified! There are 5 feasible states.
+ 
+Solving pi * Q = 0 ...
+- Equilibrium distribution found! Prob. of being in each possible state:
+    0.0000    0.0049    0.0025    0.9878    0.0048
+
+- Reversible Markov chain? 0 (error: 1.4215)
+- Dominant state: s4 (with probability 0.98777)
+ 
+Computing throughput...
+- Throughput computed!
+ 
+ 
+***** DISPLAYING RESULTS *****
+ 
+- GLOBAL states (PSI):
+PSI(1)
+     0
+     0
+
+PSI(2)
+     0
+     1
+
+PSI(3)
+     0
+     2
+
+PSI(4)
+     0
+     3
+
+PSI(5)
+     1
+     0
+
+PSI(6)
+     1
+     1
+
+PSI(7)
+     1
+     2
+
+PSI(8)
+     1
+     3
+
+PSI(9)
+     2
+     0
+
+PSI(10)
+     2
+     1
+
+PSI(11)
+     2
+     2
+
+PSI(12)
+     2
+     3
+
+PSI(13)
+     3
+     0
+
+PSI(14)
+     3
+     1
+
+PSI(15)
+     3
+     2
+
+PSI(16)
+     3
+     3
+
+ 
+- PSI logical transition matrix (Q_logical_PSI)
+     0     1     0     0     1     0     0     0     0     0     0     0     0     0     0     0
+     2     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     2     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     2     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0
+     0     2     0     0     0     0     0     0     2     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
+
+ 
+- FEASIBLE states (S). Number of states :5
+S(1)
+     0
+     0
+
+S(2)
+     1
+     0
+
+S(3)
+     0
+     1
+
+S(4)
+     2
+     1
+
+S(5)
+     2
+     0
+
+- Plotting PSI CTMC...
+   + Plotted!
+- Plotting S CTMC...
+   + Plotted!
+Finished!
