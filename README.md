@@ -2,9 +2,12 @@
   <img src="https://github.com/sergiobarra/SFCTMN/blob/master/sfctmn_logo.png" width="340" height="100">
 </p>
 
-# Spatial Flexible Continuous Time Markov Network (SFCTMN)
+# IEEE 802.11ax Single-Channel Spatial Reuse in the Spatial Flexible Continuous Time Markov Network (11axSR-SFCTMN)
 
-Continuous Time Markov Network (CTMN) based framework for analyzing Wireless Local Area Networks (WLANs) implementing Dynamic Channel Bonding (DCB) policies in spatially distributed scenarios, where WLANs are not required to be within the carrier sense range of each other.
+Continuous Time Markov Network (CTMN) based framework for analyzing Wireless Local Area Networks (WLANs) implementing the IEEE 802.11ax OBSS PD-based Spatial Reuse operation. Single channel transmissions are only supported.
+
+Details on the IEEE 802.11ax SR implementation can be found at [Francesc Wilhelmi, Boris Bellalta, Cristina Cano, Sergio Barrachina-Mu\~noz \& Ioannis Selinis. Spatial Reuse in the IEEE 802.11ax:Current status, Challenges and Research Opportunities. -, 2019.](https://arxiv.org/)
+
 Details on the framework can be found at [S. Barrachina-Muñoz, F. Wilhelmi, and B. Bellalta. Performance of Dynamic Channel Bonding in Spatially Distributed High Density WLANs. arXiv preprint arXiv:1801.00594, 2018.](https://arxiv.org/pdf/1801.00594.pdf)
 
 ### Installation
