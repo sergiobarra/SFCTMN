@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://github.com/sergiobarra/SFCTMN/blob/master/sfctmn_logo.png" width="340" height="100">
+  <img src="https://github.com/sergiobarra/SFCTMN/blob/master/sfctmn_logo_sr.png" width="340" height="100">
 </p>
 
-# IEEE 802.11ax Single-Channel Spatial Reuse in the Spatial Flexible Continuous Time Markov Network (11axSR-SFCTMN)
+# 11ax Spatial Reuse in the Spatial Flexible Continuous Time Markov Network (11axSR-SFCTMN)
 
 Continuous Time Markov Network (CTMN) based framework for analyzing Wireless Local Area Networks (WLANs) implementing the IEEE 802.11ax OBSS PD-based Spatial Reuse operation. Single channel transmissions are only supported.
 
