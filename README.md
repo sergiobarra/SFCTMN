@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/sergiobarra/SFCTMN/blob/master/sfctmn_logo_sr.png" width="340" height="100">
+  <img src="https://github.com/sergiobarra/SFCTMN/blob/single_channel_IEEE80211ax_spatial_reuse/sfctmn_logo_sr.png" width="340" height="100">
 </p>
 
 # 11ax Spatial Reuse in the Spatial Flexible Continuous Time Markov Network (11axSR-SFCTMN)
