@@ -26,6 +26,7 @@ The general flowchart of the framework is detailed in the following image:
  
 <p align="center">
 <img src="https://github.com/sergiobarra/SFCTMN/blob/master/documentation/General%20flowchart.png" width="700" height="300">
+<br>
 <em>SFCTMN's flowchart.</em>
 </p>
 
@@ -33,8 +34,8 @@ Next, we show an example of input to use the 11ax SR in the SFCTMN. First of all
 
 | code | primary | left ch | right ch | tx_power | cca | lambda | x_ap | y_ap | z_ap | x_sta | y_sta | z_sta | legacy_node | cw  | non_srg_activated | srg | non_srg_obss_pd | srg_obss_pd | tx_pwr_ref |
 |------|---------|---------|----------|----------|-----|--------|------|------|------|-------|-------|-------|-------------|-----|-------------------|-----|-----------------|-------------|------------|
-| 1    | 1       | 1       | 1        | 20       | -82 | 14815  | 0    | 4    | 0    | 0     | 0     | 0     | 0           | 512 | 1                 | 0   | -80             | -75         | 21         |
-| 2    | 1       | 1       | 1        | 20       | -82 | 14815  | 6    | 4    | 0    | 6     | 8     | 0     | 0           | 512 | 0                 | 0   | -80             | -75         | 21         |
+| 1    | 1       | 1       | 1        | 20       | -82 | 14815  | 0    | 4    | 0    | 0     | 0     | 0     | 0           | 512 | 1                 | 0   | -78             | -82         | 21         |
+| 2    | 1       | 1       | 1        | 20       | -82 | 14815  | 6    | 4    | 0    | 6     | 8     | 0     | 0           | 512 | 0                 | 0   | -78             | -82         | 21         |
 
 Notice that new fields are:
 * non_srg_activated: indicates whether the WLAN applies the SR operation or not.
@@ -46,7 +47,8 @@ Notice that new fields are:
 The previous input generates the following output (provided that the default 11ax parameters are used):
 <p align="center">
 <img src="https://github.com/sergiobarra/SFCTMN/blob/single_channel_IEEE80211ax_spatial_reuse/documentation/example_output_sr.png" width="380" height="300">
-<em>Example of 11ax SR in SFCTMN. (a) WLAN scenario, (b) Channels allocation, (c) CTMN.</em>
+  <br>
+    <em>Example of 11ax SR in SFCTMN. (a) WLAN scenario, (b) Channels allocation, (c) CTMN.</em>
 </p>
 
 ### Support
