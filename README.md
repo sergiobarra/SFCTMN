@@ -38,11 +38,11 @@ Next, we show an example of input to use the 11ax SR in the SFCTMN. First of all
 | 2    | 1       | 1       | 1        | 20       | -82 | 14815  | 6    | 4    | 0    | 6     | 8     | 0     | 0           | 512 | 0                 | 0   | -78             | -82         | 21         |
 
 Notice that new fields are:
-* non_srg_activated: indicates whether the WLAN applies the SR operation or not.
-* srg: indicated the Spatial Reuse Group (SRG) that the WLAN belongs to.
-* non_srg_obss_pd: indicates the non-SRG OBSS PD threshold (in dBm).
-* srg_obss_pd: indicates the SRG OBSS PD threshold (in dBm).
-* tx_pwr_ref: indicates the transmission power reference (in dBm). According to the 11ax amendment, this value can be 21 or 25 dBm, according to the device's capabilities.
+* **non_srg_activated:** indicates whether the WLAN applies the SR operation or not.
+* **srg:** indicated the Spatial Reuse Group (SRG) that the WLAN belongs to.
+* **non_srg_obss_pd:** indicates the non-SRG OBSS PD threshold (in dBm).
+* **srg_obss_pd:** indicates the SRG OBSS PD threshold (in dBm).
+* **tx_pwr_ref:** indicates the transmission power reference (in dBm). According to the 11ax amendment, this value can be 21 or 25 dBm, according to the device's capabilities.
 
 The previous input generates the following output (provided that the default 11ax parameters are used):
 <p align="center">
