@@ -46,7 +46,7 @@ Notice that new fields are:
 
 The previous input generates the following output (provided that the default 11ax parameters are used):
 <p align="center">
-<img src="https://github.com/sergiobarra/SFCTMN/blob/single_channel_IEEE80211ax_spatial_reuse/documentation/example_output_sr.png" width="380" height="300">
+<img src="https://github.com/sergiobarra/SFCTMN/blob/single_channel_IEEE80211ax_spatial_reuse/documentation/example_output_sr.png" width="580" height="460">
   <br>
     <em>Example of 11ax SR in SFCTMN. (a) WLAN scenario, (b) Channels allocation, (c) CTMN.</em>
 </p>
