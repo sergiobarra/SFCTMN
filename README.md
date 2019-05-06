@@ -31,9 +31,10 @@ The general flowchart of the framework is detailed in the following image:
 
 Next, we show an example of input to use the 11ax SR in the SFCTMN. First of all, the input must contain additional parameters regarding the SR operation.
 
-% code; primary; left ch; right ch; tx_power; cca; lambda; x_ap; y_ap; z_ap; x_sta; y_sta; z_sta; legacy_node; cw;non_srg_activated;srg;non_srg_obss_pd;srg_obss_pd;tx_pwr_ref
-1;1;1;1;20;-82;14815;0;4;0;0;0;0;0;512;1;0;-80;-75;21
-2;1;1;1;20;-82;14815;6;4;0;6;8;0;0;512;0;0;-80;-75;21
+| code | primary | left ch | right ch | tx_power | cca | lambda | x_ap | y_ap | z_ap | x_sta | y_sta | z_sta | legacy_node | cw  | non_srg_activated | srg | non_srg_obss_pd | srg_obss_pd | tx_pwr_ref |
+|------|---------|---------|----------|----------|-----|--------|------|------|------|-------|-------|-------|-------------|-----|-------------------|-----|-----------------|-------------|------------|
+| 1    | 1       | 1       | 1        | 20       | -82 | 14815  | 0    | 4    | 0    | 0     | 0     | 0     | 0           | 512 | 1                 | 0   | -80             | -75         | 21         |
+| 2    | 1       | 1       | 1        | 20       | -82 | 14815  | 6    | 4    | 0    | 6     | 8     | 0     | 0           | 512 | 0                 | 0   | -80             | -75         | 21         |
 
 Notice that new fields are:
 * non_srg_activated: indicates whether the WLAN applies the SR operation or not.
