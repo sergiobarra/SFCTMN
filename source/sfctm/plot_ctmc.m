@@ -16,7 +16,7 @@ function [labels_ctmc] = plot_ctmc( S, num_wlans, num_channels_system, plot_titl
     % Output:
     %   - labels_ctmc: array of node labels    
     
-    load('constants.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
     
     % Set font type
     set(0,'defaultUicontrolFontName','Helvetica');

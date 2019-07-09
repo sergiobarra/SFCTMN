@@ -1,19 +1,24 @@
 %%% ***********************************************************************
-%%% *      A Tutorial on the Spatial Reuse Operation in IEEE 802.11ax:    *
-%%% *         Work Done, Challenges and Research Opportunities            *
-%%% * Submission to ...                                                   *
+%%% *                                                                     *
+%%% *             Spatial Reuse Operation in IEEE 802.11ax:               *
+%%% *          Analysis, Challenges and Research Opportunities            *
+%%% *                                                                     *
+%%% * Submission to IEEE Surveys & Tutorials                              *
+%%% *                                                                     *
 %%% * Authors:                                                            *
 %%% *   - Francesc Wilhelmi (francisco.wilhelmi@upf.edu)                  *
+%%% *   - Sergio Barrachina-Muñoz  (sergio.barrachina@upf.edu)            *
 %%% *   - Boris Bellalta (boris.bellalta@upf.edu)                         *
 %%% *   - Cristina Cano (ccanobs@uoc.edu)                                 *
 %%% * 	- Ioannis Selinis (ioannis.selinis@surrey.ac.uk)                  *
-%%% *   - Sergio Barrachina-Muñoz  (sergio.barrachina@upf.edu)            *
-%%% * Copyright (C) 2017-2022, and GNU GPLd, by Francesc Wilhelmi         *
+%%% *                                                                     *
+%%% * Copyright (C) 2019-2024, and GNU GPLd, by Francesc Wilhelmi         *
+%%% *                                                                     *
 %%% * Repository:                                                         *
-%%% *  bitbucket.org/fwilhelmi/overview_ieee80211ax_spatial_reuse/        *
+%%% *  https://github.com/fwilhelmi/tutorial_11ax_spatial_reuse           *
 %%% ***********************************************************************
 
-function wlans = generate_wlans_from_file(filename, draw_map, ...
+function wlans = generate_wlan_from_file(filename, draw_map, ...
     random_initial_conf, actions_channel, actions_cca, actions_tpc)
 % GenerateNetwork3D - Generates a 3D network 
 %   OUTPUT: 
@@ -27,8 +32,8 @@ function wlans = generate_wlans_from_file(filename, draw_map, ...
 %       * stas_position: way STAs are placed (1 - "random", 2 - "safe" or 3 - "exposed")
 %       * printMap: flag for calling DrawNetwork3D at the end
 
-    load('constants.mat');  % Load constants into workspace
-    load('system_conf.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
+    load('configuration_system.mat');  % Load constants into workspace
 
     disp('Processing input CSV...')
     input_data = load(filename);            

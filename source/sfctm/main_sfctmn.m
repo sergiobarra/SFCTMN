@@ -16,7 +16,7 @@ clc
 type 'sfctmn_header.txt'
 
 %% FRAMEWORK CONFIGURATION
-constants_script
+constants_sfctmn_framework
 
 if flag_save_console_logs
     diary('console_logs.txt') % Save logs in a text file
@@ -34,45 +34,31 @@ display_with_flag('Setting framework up...', flag_general_logs)
 
 % Framework constant variables
 display_with_flag('- Loading constant variables...', flag_general_logs)
-load('constants.mat')        % Execute constants_script.m script to store constants in the workspace
+load('constants_sfctmn_framework.mat')        % Execute constants_script.m script to store constants in the workspace
 display_with_flag([LOG_LVL3 'Constants loaded!'], flag_general_logs)
 
 % System configuration
 display_with_flag([LOG_LVL2 'Loading system configuration...'], flag_general_logs)
-system_conf                     % Execute system_conf.m script to store constants in the workspace
-load('system_conf.mat');        % Load constants into workspace
+configuration_system                     % Execute system_conf.m script to store constants in the workspace
+load('configuration_system.mat');        % Load constants into workspace
 display_with_flag([LOG_LVL3 'System configuration loaded!'], flag_general_logs)
 
 % Generate wlans
-input_file = "wlans_input.csv";
-wlans = generate_wlans_from_file(input_file, false, false, 1, [], []);
+input_file = "input_example_spatial_reuse.csv";
+wlans = generate_wlan_from_file(input_file, false, false, 1, [], []);
 % Determine the number of WLANs
 num_wlans = size(wlans, 2);
 
-% HARDCODING distance for convenience
-%  AP ---- AP ---- AP
-%  |       |       |
-% STA     STA     STA
-%
-if flag_hardcode_distances
-    disp([LOG_LVL3 'HARDCODING DISTANCES FOR CONVENIENCE!'])
-    distance_ap_sta = 7;
-    distance_ap_ap = 30;
-    for w = 1 : num_wlans
-        wlans(w).position_ap = [((w - 1) * distance_ap_ap) 0 0];
-        wlans(w).position_sta = wlans(w).position_ap + [0 -distance_ap_sta 0];
-    end
-    % END OF HARDCODING distance for convenience
-end
-[distance_ap_ap, distance_ap_sta] = compute_distance_nodes(wlans);
-
 % Check input correctness
-disp([LOG_LVL3 'Checking input configuration...'])
-check_input_config(wlans);
-disp([LOG_LVL4 'WLANs input file processed successfully!'])
+if flag_input_checker
+    display_with_flag([LOG_LVL3 'Checking input configuration...'], flag_general_logs)
+    check_input_config(wlans);
+    display_with_flag([LOG_LVL4 'WLANs input file processed successfully!'], flag_general_logs)
+end
 
 % SINR sensed in the STA in isolation (just considering ambient noise)
 %  - NOT USED
+%sinr_isolation = compute_sinr(powerRxStationFromAp, 0, NOISE_DBM);    
 display_wlans(wlans, flag_display_wlans, flag_plot_wlans, ...
     flag_plot_ch_allocation, num_channels, path_loss_model, carrier_frequency);
 
@@ -103,15 +89,18 @@ display_with_flag([LOG_LVL2 'Sensed power computed!'], flag_general_logs)
 
 %% Modulation and Coding Scheme    
 % Compute the MCS according to the SINR in isolation mode
-mcs_per_wlan_per_state = compute_mcs(Interest_Power_PSI_cell, num_channels);
+mcs_per_wlan_per_state = compute_mcs(PSI_cell, Interest_Power_PSI_cell, num_channels);   
 
 %% FEASIBLE STATES SPACE (S)
 % Identify feasible states space (S) according to spatial and spectrum requirements.
 display_with_flag(' ', flag_general_logs)
 display_with_flag([LOG_LVL1 'Identifying feasible state space (S) and transition rate matrix (Q)...'], flag_general_logs)
 [ Q, S, S_cell, Q_logical_S, Q_logical_PSI, S_num_states, new_mcs_per_wlan_per_state ] = identify_feasible_states_and_Q(...
-    PSI_cell, Power_AP_PSI_cell, Power_Detection_PSI_cell, Individual_Power_AP_PSI_cell, num_channels, wlans, mcs_per_wlan_per_state, flag_logs_feasible_space);
+    PSI_cell, Power_AP_PSI_cell, Power_Detection_PSI_cell, Individual_Power_AP_PSI_cell, num_channels, wlans, mcs_per_wlan_per_state, ...
+    Interest_Power_PSI_cell, SINR_cell, flag_logs_feasible_space);
 display_with_flag([LOG_LVL2 'Feasible state space (S) identified! There are ' num2str(S_num_states) ' feasible states.'], flag_general_logs)
+
+%Q
 
 %% MARKOV CHAIN
 % Solve Markov Chain from equilibrium distribution
@@ -120,6 +109,7 @@ display_with_flag([LOG_LVL1 'Solving pi * Q = 0 ...'], flag_general_logs)
 
 % Equilibrium distribution array (pi). Element s is the probability of being in state s.
 % - The left null space of Q is equivalent to solve [pi] * Q =  [0 0 ... 0 1]
+
 p_equilibrium = mrdivide([zeros(1,size(Q,1)) 1],[Q ones(size(Q,1),1)]);
 
 [Q_is_reversible, error_reversible] = isreversible(Q,p_equilibrium,1e-8); % Alessandro code for checking reversibility
@@ -137,7 +127,7 @@ display_with_flag([LOG_LVL1 'Computing throughput...'], flag_general_logs)
 throughput = get_throughput(wlans, num_wlans, p_equilibrium, S_cell, ...
     PSI_cell, SINR_cell, new_mcs_per_wlan_per_state, Power_Detection_PSI_cell, Interest_Power_PSI_cell);        
 proportional_fairness = sum(log(throughput));
-display_with_flag([LOG_LVL2 'Throughput computed!'], flag_general_logs)
+display_with_flag([LOG_LVL2 'Trhoughput computed!'], flag_general_logs)
 
 %% Save results
 if flag_save_results    

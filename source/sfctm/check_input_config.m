@@ -12,7 +12,7 @@ function [ is_config_ok ] = check_input_config( wlans )
     % Output:
     %   - is_config_ok: (deprecated) boolean for identifying if configuration is properly entered.
     
-    load('constants.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
         
     is_config_ok = true;
     

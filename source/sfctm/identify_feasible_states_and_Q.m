@@ -8,7 +8,8 @@
 
 function [ Q, S, S_cell, T_S, T_PSI, S_num_states, mcs_index_cell ] = ...
     identify_feasible_states_and_Q( PSI_cell, Power_AP_PSI_cell, Power_Detection_PSI_cell, ...
-    Individual_Power_AP_PSI_cell, num_channels_system, wlans, mcs_indexes, logs_algorithm_on )
+    Individual_Power_AP_PSI_cell, num_channels_system, wlans, mcs_indexes, ...
+    Interest_Power_PSI_cell, SINR_cell, logs_algorithm_on )
     %IDENTIFY_FEASIBLE_STATES function for finding the feasible state space (S) and transition rate matrix (Q) of a 
     % given WLAN system taking the power sensed in the interest spectrum into consideration. This algorithm is an 
     % extension to allow non-fully overlapping networks of "Faridi, Azadeh, Boris Bellalta, and Alessandro Checco. 
@@ -30,8 +31,8 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states, mcs_index_cell ] = ...
     %   - T_PSI: logical transition rates matrix in global space
     %   - S_num_states: number of feasible states 
     
-    load('constants.mat');  % Load constants into workspace
-    load('system_conf.mat');    % Load system configuration
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
+    load('configuration_system.mat');    % Load system configuration
     
     if logs_algorithm_on
         disp(' ');
@@ -123,9 +124,30 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states, mcs_index_cell ] = ...
                         mcs_index = mcs_indexes{origin_psi_ix}(wlan_ix, 1);
                         mcs_index_cell{origin_psi_ix}(wlan_ix) = mcs_index;  
                         num_ch_wlan_s = 1;  % Number of channels used by WLAN wlan in current state s
+                        
+                        %%%%%%%%%%%%%%%%%%%%%%%%%% NEW                        
+                        % Check if the transmission is successful or not
+                        % (in order to limit the tx duration)
+                        interest_power = Interest_Power_PSI_cell{origin_psi_ix}(wlan_ix);
+                        sinr = SINR_cell{origin_psi_ix}(wlan_ix);
+                        if (sinr < CAPTURE_EFFECT) || (interest_power < wlans(wlan_ix).cca)
+                            % The transmission duration lasts until the CTS timeout
+                            TimeoutFlag = true;
+                        else
+                            % The entire transmission duration is considered
+                            TimeoutFlag = false;
+                        end   
+%                         disp(['Backward transition from ' num2str(origin_psi_ix) ' to ' num2str(destination_psi_ix)])
+%                         TimeoutFlag
+%                         interest_power
+%                         sinr
                         mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, ...
-                            num_ch_wlan_s * CHANNEL_WIDTH_MHz,...
-                            SINGLE_USER_SPATIAL_STREAMS, mcs_index);
+                            num_ch_wlan_s * CHANNEL_WIDTH_MHz, SINGLE_USER_SPATIAL_STREAMS, mcs_index, TimeoutFlag);
+                        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                        
+%                         mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, ...
+%                             num_ch_wlan_s * CHANNEL_WIDTH_MHz,...
+%                             SINGLE_USER_SPATIAL_STREAMS, mcs_index);
                         % Update Q with the departure rate
                         Q(origin_s_ix, destination_s_ix) = mu_s;
                         % Indicate in T_PSI the type of transition
@@ -248,8 +270,29 @@ function [ Q, S, S_cell, T_S, T_PSI, S_num_states, mcs_index_cell ] = ...
                 % Check if there is a backward transition between "psi_ix_aux" and "psi_ix"
                 if T_PSI(psi_ix_aux, psi_ix) == BACKWARD_TRANSITION   
                     % Compute mu_s for lonely "SR" state to null state
-                    mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, num_ch_wlan_s * CHANNEL_WIDTH_MHz,...
-                        SINGLE_USER_SPATIAL_STREAMS, mcs_index_cell{psi_ix}(active_sr_wlan));   
+                    
+                    %%%%%%%%%%%%%%%%%%%%%%%%%% NEW                        
+                    % Check if the transmission is successful or not
+                    % (in order to limit the tx duration)
+                    interest_power = Interest_Power_PSI_cell{psi_ix_aux}(active_sr_wlan);
+                    sinr = SINR_cell{psi_ix_aux}(active_sr_wlan);
+                    if (sinr < CAPTURE_EFFECT) || (interest_power < wlans(active_sr_wlan).cca) 
+                        % The transmission duration lasts until the CTS timeout
+                        TimeoutFlag = true;
+                    else
+                        % The entire transmission duration is considered
+                        TimeoutFlag = false;
+                    end   
+                    
+%                     disp(['Backward transition from ' num2str(psi_ix_aux) ' to ' num2str(psi_ix_aux)])
+                    
+                    mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, ...
+                        num_ch_wlan_s * CHANNEL_WIDTH_MHz, SINGLE_USER_SPATIAL_STREAMS, mcs_indexes{psi_ix}(active_sr_wlan, 1), TimeoutFlag);
+                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                     
+                    %mu_s = 1 / SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, num_ch_wlan_s * CHANNEL_WIDTH_MHz,...
+                    %    SINGLE_USER_SPATIAL_STREAMS, mcs_index_cell{psi_ix}(active_sr_wlan));   
+                    
                     % Find state "psi_ix" in feasible space S
                     [~, origin_s_ix] = find_state_in_set(PSI_cell{psi_ix}, S_cell); 
                     % Update mu_s in the Q matrix

@@ -17,8 +17,8 @@ function [ throughput ] = get_throughput(  wlans, num_wlans, p_equilibrium, S_ce
 %   - throughput: array whose element w is the average throughput of WLAN w.
 
     % Load constants into workspace
-    load('constants.mat');  
-    load('system_conf.mat');
+    load('constants_sfctmn_framework.mat');  
+    load('configuration_system.mat');
     % Initialize the array of throughput
     throughput = zeros(num_wlans,1);
     % Iterate for each state in feasible space S
@@ -32,27 +32,24 @@ function [ throughput ] = get_throughput(  wlans, num_wlans, p_equilibrium, S_ce
             % PSI's index of the backward transition origin state
             [~, psi_ix] = find_state_in_set(S_cell{s_ix}, PSI_cell);             
             % If "wlan_ix" is active in state "psi_ix"
-            if PSI_cell{psi_ix}(wlan_ix) > 0      
+            if PSI_cell{psi_ix}(wlan_ix) > 0                 
                 interest_power = Interest_Power_PSI_cell{psi_ix}(wlan_ix);
                 sinr = SINR_cell{psi_ix}(wlan_ix);
-%                 disp('     + Checking if sinr < CAPTURE_EFFECT or interest_power < Power_Detection_PSI_cell:')
-%                 disp(['        - sinr: ' num2str(sinr)])
-%                 disp(['        - CAPTURE_EFFECT: ' num2str(CAPTURE_EFFECT)])
-%                 disp(['        - interest_power: ' num2str(interest_power)])
-%                 disp(['        - power detection: ' num2str(Power_Detection_PSI_cell{psi_ix}(wlan_ix))])
-                if (sinr < CAPTURE_EFFECT) || (interest_power < Power_Detection_PSI_cell{psi_ix}(wlan_ix))
+                if (sinr < CAPTURE_EFFECT) || (interest_power < wlans(wlan_ix).cca) %Power_Detection_PSI_cell{psi_ix}(wlan_ix))
                     capture_effect_accomplished = false;              
                 end      
-                tx_time = 0;    % Set tx_time to 0 (safety operation)
+                
+                if wlan_ix == 1 && PSI_cell{psi_ix}(wlan_ix) > 1
+                    tx_power = apply_tx_power_restriction(Power_Detection_PSI_cell{psi_ix}(wlan_ix), ...
+                        wlans(wlan_ix).tx_pwr_ref, TX_POWER_MAX, OBSS_PD_MIN, num_channels);
+                end
+                
+                % Compute the tx time spent in "psi_ix"
+                [tx_time, limited_num_pack_agg] = SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, ...
+                    num_channels * CHANNEL_WIDTH_MHz, SINGLE_USER_SPATIAL_STREAMS, mcs_per_wlan{psi_ix}(wlan_ix), false);    
+                
                 % If the CE condition is accomplisehd, compute "mu" for state "psi_ix"
-                if capture_effect_accomplished
-                    % Compute the tx time spent in "psi_ix"
-                    tx_time = SUtransmission80211ax(PACKET_LENGTH, NUM_PACKETS_AGGREGATED, ...
-                      num_channels * CHANNEL_WIDTH_MHz, SINGLE_USER_SPATIAL_STREAMS, mcs_per_wlan{psi_ix}(wlan_ix));                                       
-%                     disp(['  wlan_ix: ' num2str(wlan_ix)])
-%                     disp(['  psi_ix: ' num2str(psi_ix)])
-%                     disp(['  mcs: ' num2str(mcs_per_wlan{psi_ix}(wlan_ix))])
-%                     disp(['  tx_time: ' num2str(tx_time)])
+                if capture_effect_accomplished                                             
                     % Compute "mu" in psi_ix
                     mu = 1/tx_time;                   
                 else
@@ -60,14 +57,9 @@ function [ throughput ] = get_throughput(  wlans, num_wlans, p_equilibrium, S_ce
                     mu = 0; 
                 end
                 % Add the throughput of "psi_ix" to the total throughput of wlan "wlan_ix"            
-                throughput(wlan_ix) = throughput(wlan_ix) + (1 - PACKET_ERR_PROBABILITY) * NUM_PACKETS_AGGREGATED *...
-                    PACKET_LENGTH * mu * pi_s ./ 1E6;                             
-%                 disp(['        - PACKET_ERR_PROBABILITY: ' num2str(PACKET_ERR_PROBABILITY)])
-%                 disp(['        - NUM_PACKETS_AGGREGATED: ' num2str(NUM_PACKETS_AGGREGATED)])
-%                 disp(['        - PACKET_LENGTH: ' num2str(PACKET_LENGTH)])
-%                 disp(['        - mu: ' num2str(mu)])
-%                 disp(['        - pi_s: ' num2str(pi_s)])
-%                 disp(['        - throughput(wlan_ix): ' num2str(throughput(wlan_ix))])                
+                throughput(wlan_ix) = throughput(wlan_ix) + ...
+                    (1 - PACKET_ERR_PROBABILITY) * limited_num_pack_agg *...
+                    PACKET_LENGTH * mu * pi_s ./ 1E6;                                          
             end
         end
     end

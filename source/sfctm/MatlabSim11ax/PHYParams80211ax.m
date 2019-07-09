@@ -3,7 +3,7 @@ function [Nsc,Ym,Yc,T_OFDM,Legacy_PHYH,HE_PHYH]=PHYParams80211ax(W,MCSindex,SUSS
   
   % Header ------
   
-  load('constants.mat');
+  load('constants_sfctmn_framework.mat');
   
   % Physical Header (HE SU Format)
   Legacy_PHYH = 20E-6;
@@ -25,11 +25,9 @@ function [Nsc,Ym,Yc,T_OFDM,Legacy_PHYH,HE_PHYH]=PHYParams80211ax(W,MCSindex,SUSS
     case 80
          Nsc = 980;
     case 160
-         Nsc = 1960;
-          
+         Nsc = 1960;          
     otherwise 
-          Nsc = -1;    
-        
+          Nsc = -1;           
   end
   
   % Modulation and Coding Scheme (MCS) - Without DCM!!!
@@ -77,5 +75,5 @@ function [Nsc,Ym,Yc,T_OFDM,Legacy_PHYH,HE_PHYH]=PHYParams80211ax(W,MCSindex,SUSS
         Yc = -1;
   end  
   % Duration of OFDM symbol (CP of 3.2us is included)
-  T_OFDM = 16E-6;  
+  T_OFDM = 4E-6;  
 end

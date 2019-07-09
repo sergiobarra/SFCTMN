@@ -11,16 +11,16 @@
 % Framework configuration. Booleans for activating specific functionalities
 
 % - General settings
-flag_save_console_logs = true;     % Flag for saving the console logs in a text file
+flag_save_console_logs = false;     % Flag for saving the console logs in a text file
 flag_save_results = false;     % Flag for saving the results
 
 % - General logs
-flag_general_logs = true;
+flag_general_logs = false;
 
 % - Display
-flag_display_PSI_states = true;    % Flag for displaying PSI's CTMC states
-flag_display_S_states = true;      % Flag for displaying S' CTMC states
-flag_display_wlans = true;         % Flag for displaying WLANs' input info
+flag_display_PSI_states = false;    % Flag for displaying PSI's CTMC states
+flag_display_S_states = false;      % Flag for displaying S' CTMC states
+flag_display_wlans = false;         % Flag for displaying WLANs' input info
 flag_display_Power_PSI = false;     % Flag for displaying sensed powers
 flag_display_Q_logical = false;     % Flag for displaying logical transition rate matrix 
 flag_display_Q = false;             % Flag for displaying transition rate matrix
@@ -28,9 +28,9 @@ flag_display_throughput = false;    % Flag for displaying the throughput
 
 % - Plots
 flag_plot_PSI_ctmc = true;         % Flag for plotting PSI's CTMC
-flag_plot_S_ctmc = true;           % Flag for plotting S' CTMC
+flag_plot_S_ctmc = false;          % Flag for plotting S' CTMC
 flag_plot_wlans = true;            % Flag for plotting WLANs' distribution
-flag_plot_ch_allocation = true;    % Flag for plotting WLANs' channel allocation
+flag_plot_ch_allocation = false;   % Flag for plotting WLANs' channel allocation
 flag_plot_throughput = true;       % Flag for plotting the throughput
 
 % - Logs
@@ -181,4 +181,4 @@ STATE_DEFAULT = 1;
 STATE_NONSRG_ACTIVATED = 2;
 STATE_SRG_ACTIVATED = 3;
 
-save('constants.mat');  % Save constants into current folder
+save('constants_sfctmn_framework.mat');  % Save constants into current folder

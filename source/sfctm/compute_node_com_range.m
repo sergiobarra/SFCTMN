@@ -18,7 +18,7 @@ function [ range ] = compute_node_com_range(path_loss_model, power_tx, sensitivi
     %   Returned parameters:
     %   - d_max: Max distance reachable [m]
 
-    load('constants.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
 
     switch path_loss_model
         case PATH_LOSS_FREE_SPACE

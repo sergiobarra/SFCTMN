@@ -11,7 +11,7 @@ function [ ] = plot_throughput( throughput, num_wlans, plot_title )
     %   - throughput: array whose element w is the average throughput of WLAN w
     %   - num_wlans: number of WLANs in the system
     
-    load('constants.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
     
     figure
     hold on

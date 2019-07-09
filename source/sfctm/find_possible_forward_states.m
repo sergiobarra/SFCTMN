@@ -23,7 +23,7 @@ function [ possible_forward_states ] = find_possible_forward_states( ...
 % Output:
 %  - possible_forward_states: array with the potential forward states
 
-    load('constants.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
 
     possible_forward_states = [];
     for psi_ix = 1 : num_global_states    % Foreach state psi in PSI

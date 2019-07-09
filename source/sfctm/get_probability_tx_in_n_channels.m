@@ -26,8 +26,8 @@ function [ prob_tx_in_num_channels_success, prob_tx_in_num_channels_unsuccess ] 
 %     load('constants_ctmn.mat');  % Load constants into workspace
 %     load('system_conf.mat');    % Load constants into workspace
 
-    load('constants.mat');  % Load constants into workspace
-    load('system_conf.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
+    load('configuration_system.mat');  % Load constants into workspace
     
     S_num_states = length(S_cell);  % Number of feasible states
 

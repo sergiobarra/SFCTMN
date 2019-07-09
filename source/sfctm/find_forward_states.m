@@ -20,7 +20,7 @@ function [ psi_forward, alpha ] = find_forward_states( possible_forward_states, 
 %   - psi_forward: state (or states) to transit forward to
 %   - alpha: array of transition rate tunning parameters
 
-    load('constants.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
 
     % Number of possible states to transit forward
     num_possible_forward_states = length(possible_forward_states(:,1)); 

@@ -20,8 +20,8 @@ function [ Power_AP_PSI_cell, Power_STA_PSI_cell, SINR_cell, Tx_Power_Linear_PSI
     %   - carrier_frequency: carrier frequency
     %   - Power_from_AP: power that each STA receives from its AP (in dBm)
     
-    load('constants.mat');  % Load constants into workspace
-    load('system_conf.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
+    load('configuration_system.mat');  % Load constants into workspace
     
     num_wlans = length(wlans);  % Number of WLANs
     [distance_ap_ap, distance_ap_sta] = compute_distance_nodes(wlans); % distances between APs and STAs
@@ -69,8 +69,11 @@ function [ Power_AP_PSI_cell, Power_STA_PSI_cell, SINR_cell, Tx_Power_Linear_PSI
             tx_power(wlan_ix) = min(TX_POWER_MAX, wlans(wlan_ix).tx_power - 3 * (num_channels - 1));
             if power_restriction_activated{psi_ix}(wlan_ix) == 1
                 % - Apply power restriction
-                tx_power_max = min(TX_POWER_MAX , wlans(wlan_ix).tx_pwr_ref ...
-                    - (power_detection_threshold(wlan_ix) - OBSS_PD_MIN) - 3 * (num_channels - 1));  
+                tx_power_max = apply_tx_power_restriction( ...
+                    power_detection_threshold(wlan_ix), wlans(wlan_ix).tx_pwr_ref, ...
+                    TX_POWER_MAX, OBSS_PD_MIN, num_channels );
+%                 tx_power_max = min(TX_POWER_MAX , wlans(wlan_ix).tx_pwr_ref ...
+%                     - (power_detection_threshold(wlan_ix) - OBSS_PD_MIN) - 3 * (num_channels - 1));  
                 if tx_power_max < tx_power(wlan_ix)
                     tx_power(wlan_ix) = tx_power_max;
                 end  

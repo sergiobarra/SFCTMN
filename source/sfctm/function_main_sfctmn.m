@@ -16,7 +16,7 @@ function [throughput] = function_main_sfctmn(wlans)
     % Display framework header
     % type 'sfctmn_header.txt'
     %% FRAMEWORK CONFIGURATION
-    constants_script
+    constants_sfctmn_framework
         
     if flag_save_console_logs
         diary('console_logs.txt') % Save logs in a text file
@@ -83,20 +83,22 @@ function [throughput] = function_main_sfctmn(wlans)
         Power_Detection_PSI_cell, Interest_Power_PSI_cell, Individual_Power_AP_PSI_cell] = ...
         compute_sensed_power(wlans, num_global_states, PSI_cell, path_loss_model, carrier_frequency, num_channels);
     display_with_flag([LOG_LVL2 'Sensed power computed!'], flag_general_logs)     
-       
-    
+          
     %% Modulation and Coding Scheme    
     % Compute the MCS according to the SINR in isolation mode
-    mcs_per_wlan_per_state = compute_mcs(Interest_Power_PSI_cell, num_channels);
-
+    mcs_per_wlan_per_state = compute_mcs(PSI_cell, Interest_Power_PSI_cell, num_channels);   
+       
     %% FEASIBLE STATES SPACE (S)
     % Identify feasible states space (S) according to spatial and spectrum requirements.
     display_with_flag(' ', flag_general_logs)
     display_with_flag([LOG_LVL1 'Identifying feasible state space (S) and transition rate matrix (Q)...'], flag_general_logs)
     [ Q, S, S_cell, Q_logical_S, Q_logical_PSI, S_num_states, new_mcs_per_wlan_per_state ] = identify_feasible_states_and_Q(...
-        PSI_cell, Power_AP_PSI_cell, Power_Detection_PSI_cell, Individual_Power_AP_PSI_cell, num_channels, wlans, mcs_per_wlan_per_state, flag_logs_feasible_space);
+        PSI_cell, Power_AP_PSI_cell, Power_Detection_PSI_cell, Individual_Power_AP_PSI_cell, num_channels, wlans, mcs_per_wlan_per_state, ...
+        Interest_Power_PSI_cell, SINR_cell, flag_logs_feasible_space);
     display_with_flag([LOG_LVL2 'Feasible state space (S) identified! There are ' num2str(S_num_states) ' feasible states.'], flag_general_logs)
-      
+    
+    %Q
+    
     %% MARKOV CHAIN
     % Solve Markov Chain from equilibrium distribution
     display_with_flag(' ', flag_general_logs)
@@ -104,8 +106,9 @@ function [throughput] = function_main_sfctmn(wlans)
 
     % Equilibrium distribution array (pi). Element s is the probability of being in state s.
     % - The left null space of Q is equivalent to solve [pi] * Q =  [0 0 ... 0 1]
-    p_equilibrium = mrdivide([zeros(1,size(Q,1)) 1],[Q ones(size(Q,1),1)]);
     
+    p_equilibrium = mrdivide([zeros(1,size(Q,1)) 1],[Q ones(size(Q,1),1)]);
+       
     [Q_is_reversible, error_reversible] = isreversible(Q,p_equilibrium,1e-8); % Alessandro code for checking reversibility
     display_with_flag([LOG_LVL2 'Equilibrium distribution found! Prob. of being in each possible state:'], flag_general_logs)
     display_with_flag(p_equilibrium, flag_general_logs)

@@ -14,7 +14,7 @@ function [ limited_tx_power ] = apply_power_restriction( cca_values, TX_PWR_REF 
     % Output:
     %   - 
     
-    load('constants.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
     %load('configuration_system.mat');  % Load constants into workspace
     
     limited_tx_power = zeros (1, size(cca_values, 2));

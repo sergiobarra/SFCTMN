@@ -19,7 +19,7 @@ function [ power_rx ] = compute_power_received(distance, power_tx, G_tx, G_rx, f
     % Output:
     %   - power_rx: power received [dBm]
     
-    load('constants.mat');  % Load constants into workspace
+    load('constants_sfctmn_framework.mat');  % Load constants into workspace
 
     switch path_loss_model
         
